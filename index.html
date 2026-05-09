@@ -268,13 +268,14 @@ header::after {
   box-shadow: 0 10px 36px rgba(0,0,0,0.65), 0 2px 8px rgba(0,0,0,0.45), inset 0 1px 0 rgba(255,255,255,0.9);
   border: 1px solid rgba(0,0,0,0.12);
   transition: transform 0.15s ease;
-  animation: dealCard 0.28s cubic-bezier(0.22,1,0.36,1);
+  animation: dealCard 0.55s cubic-bezier(0.22,1,0.28,1);
   overflow: hidden;
 }
 
 @keyframes dealCard {
-  from { transform: translateY(-28px) scale(0.88) rotate(-2deg); opacity: 0; }
-  to   { transform: translateY(0) scale(1) rotate(0deg); opacity: 1; }
+  0%   { transform: translateX(340px) translateY(-60px) rotate(18deg) scale(0.85); opacity: 0; }
+  40%  { opacity: 1; }
+  100% { transform: translateX(0) translateY(0) rotate(0deg) scale(1); opacity: 1; }
 }
 
 /* Subtle paper texture */
@@ -341,22 +342,63 @@ header::after {
 }
 
 .card.back {
-  background: #1b2e80;
+  background: #0f1a5c;
   color: transparent;
+  overflow: hidden;
 }
 
-.card.back::before { display: none; }
-
-.card.back::after {
+.card.back::before {
   content: '';
   position: absolute;
-  inset: 7px;
+  inset: 0;
+  background:
+    repeating-linear-gradient(
+      45deg,
+      rgba(201,168,76,0.08) 0px, rgba(201,168,76,0.08) 1px,
+      transparent 1px, transparent 7px
+    ),
+    repeating-linear-gradient(
+      -45deg,
+      rgba(201,168,76,0.08) 0px, rgba(201,168,76,0.08) 1px,
+      transparent 1px, transparent 7px
+    ),
+    linear-gradient(160deg, #1a2d80 0%, #0a1448 50%, #0d1f6e 100%);
+  border-radius: 10px;
+  z-index: 1;
+}
+
+.card.back::after {
+  content: '♠';
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 36px;
+  color: rgba(201,168,76,0.7);
+  text-shadow: 0 0 12px rgba(201,168,76,0.3);
+  box-shadow:
+    inset 0 0 0 6px rgba(201,168,76,0.0),
+    inset 0 0 0 7px rgba(201,168,76,0.0);
+}
+
+/* Inner gold border frame — using a pseudo on a wrapper */
+.card.back .card-back-frame {
+  position: absolute;
+  inset: 6px;
   border: 1.5px solid rgba(201,168,76,0.55);
   border-radius: 5px;
-  background:
-    repeating-linear-gradient(45deg, rgba(201,168,76,0.07) 0px, rgba(201,168,76,0.07) 1px, transparent 1px, transparent 9px),
-    repeating-linear-gradient(-45deg, rgba(201,168,76,0.07) 0px, rgba(201,168,76,0.07) 1px, transparent 1px, transparent 9px);
-  z-index: 1;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.card.back .card-back-frame::before {
+  content: '';
+  position: absolute;
+  inset: 4px;
+  border: 0.5px solid rgba(201,168,76,0.25);
+  border-radius: 3px;
 }
 
 /* Dealer/Player score badge */
@@ -727,8 +769,34 @@ header::after {
 <div class="main-container">
 
   <div class="leaderboard-sidebar">
-    <div class="lb-title" id="lb-title">Top Scores</div>
-    <div id="leaderboard"></div>
+    <div class="lb-title">This Session</div>
+
+    <div style="text-align:center; padding: 24px 0 16px;">
+      <div style="font-family:'DM Mono',monospace; font-size:9px; letter-spacing:0.25em; text-transform:uppercase; color:var(--text-muted); margin-bottom:10px;">Best Balance</div>
+      <div id="session-best" style="font-size:42px; font-weight:700; color:var(--gold-light); letter-spacing:0.04em;">£100</div>
+    </div>
+
+    <div style="border-top:1px solid rgba(201,168,76,0.1); margin: 8px 0 20px;"></div>
+
+    <div style="text-align:center;">
+      <div style="font-family:'DM Mono',monospace; font-size:9px; letter-spacing:0.25em; text-transform:uppercase; color:var(--text-muted); margin-bottom:10px;">Games Played</div>
+      <div id="session-games" style="font-size:28px; font-weight:600; color:var(--cream);">0</div>
+    </div>
+
+    <div style="border-top:1px solid rgba(201,168,76,0.1); margin: 20px 0;"></div>
+
+    <div style="text-align:center;">
+      <div style="font-family:'DM Mono',monospace; font-size:9px; letter-spacing:0.25em; text-transform:uppercase; color:var(--text-muted); margin-bottom:10px;">Hands Won</div>
+      <div id="session-wins" style="font-size:28px; font-weight:600; color:#80e090;">0</div>
+    </div>
+
+    <div style="border-top:1px solid rgba(201,168,76,0.1); margin: 20px 0;"></div>
+
+    <div style="text-align:center;">
+      <div style="font-family:'DM Mono',monospace; font-size:9px; letter-spacing:0.25em; text-transform:uppercase; color:var(--text-muted); margin-bottom:10px;">Hands Lost</div>
+      <div id="session-losses" style="font-size:28px; font-weight:600; color:#e05252;">0</div>
+    </div>
+
   </div>
 
   <div class="game-container">
@@ -773,14 +841,14 @@ header::after {
         <div class="bet-row">
           <div class="bet-label">Wager</div>
           <div class="bet-controls">
-            <button class="bet-btn" onclick="changeBet(-5)">−</button>
+            <button type="button" class="bet-btn" onclick="changeBet(-5)">−</button>
             <input type="number" id="bet-input" value="10" min="5" step="5">
-            <button class="bet-btn" onclick="changeBet(5)">+</button>
+            <button type="button" class="bet-btn" onclick="changeBet(5)">+</button>
           </div>
           <div class="quick-bets">
-            <button class="quick-bet" onclick="setQuickBet(10)">£10</button>
-            <button class="quick-bet" onclick="setQuickBet(25)">£25</button>
-            <button class="quick-bet" onclick="setQuickBet(50)">£50</button>
+            <button type="button" class="quick-bet" onclick="setQuickBet(10)">£10</button>
+            <button type="button" class="quick-bet" onclick="setQuickBet(25)">£25</button>
+            <button type="button" class="quick-bet" onclick="setQuickBet(50)">£50</button>
           </div>
         </div>
 
@@ -801,22 +869,23 @@ header::after {
 
 <!-- End-game modal -->
 <div id="end-modal" style="display:none; position:fixed; inset:0; z-index:300; align-items:center; justify-content:center; background:rgba(2,7,2,0.88);">
-  <div style="background:linear-gradient(180deg,#0d1f0d,#060e06); border:1px solid rgba(201,168,76,0.35); border-radius:18px; padding:44px 48px; max-width:420px; width:90%; text-align:center; box-shadow:0 24px 80px rgba(0,0,0,0.8), 0 0 0 1px rgba(201,168,76,0.08); position:relative;">
-    <div style="font-size:36px; letter-spacing:6px; margin-bottom:20px; color:var(--gold);">♠ ♥</div>
-    <div style="font-family:'DM Mono',monospace; font-size:10px; letter-spacing:0.3em; text-transform:uppercase; color:var(--text-muted); margin-bottom:8px;">Final Balance</div>
-    <div id="modal-balance" style="font-size:52px; font-weight:700; color:var(--gold-light); margin-bottom:6px; letter-spacing:0.04em;"></div>
-    <div id="modal-rank" style="font-family:'DM Mono',monospace; font-size:12px; color:#80e090; margin-bottom:32px; letter-spacing:0.1em;"></div>
-    <div style="border-top:1px solid rgba(201,168,76,0.12); padding-top:28px;">
-      <div id="modal-name-section">
-        <div style="font-family:'DM Mono',monospace; font-size:10px; letter-spacing:0.2em; text-transform:uppercase; color:var(--text-muted); margin-bottom:12px;">Enter your name</div>
-        <input id="modal-name-input"
-          type="text" maxlength="18" placeholder="Your name…"
-          onkeydown="if(event.key==='Enter') submitScore()"
-          style="width:100%; padding:12px 16px; font-family:'Cormorant Garamond',serif; font-size:20px; background:rgba(0,0,0,0.4); border:1px solid rgba(201,168,76,0.25); border-radius:8px; color:var(--cream); outline:none; text-align:center; margin-bottom:16px;">
+  <div style="background:linear-gradient(180deg,#0d1f0d,#060e06); border:1px solid rgba(201,168,76,0.35); border-radius:18px; padding:44px 48px; max-width:400px; width:90%; text-align:center; box-shadow:0 24px 80px rgba(0,0,0,0.8), 0 0 0 1px rgba(201,168,76,0.08);">
+    <div style="font-size:32px; letter-spacing:6px; margin-bottom:20px; color:var(--gold);">♠ ♥ ♦ ♣</div>
+    <div style="font-family:'DM Mono',monospace; font-size:10px; letter-spacing:0.3em; text-transform:uppercase; color:var(--text-muted); margin-bottom:6px;">Final Balance</div>
+    <div id="modal-balance" style="font-size:52px; font-weight:700; color:var(--gold-light); margin-bottom:24px; letter-spacing:0.04em;"></div>
+
+    <div style="display:flex; gap:16px; margin-bottom:28px;">
+      <div style="flex:1; background:rgba(201,168,76,0.06); border:1px solid rgba(201,168,76,0.12); border-radius:10px; padding:14px 10px;">
+        <div style="font-family:'DM Mono',monospace; font-size:9px; letter-spacing:0.2em; text-transform:uppercase; color:var(--text-muted); margin-bottom:6px;">Best</div>
+        <div id="modal-best" style="font-size:20px; font-weight:600; color:var(--gold-light);"></div>
       </div>
-      <button id="modal-save-btn" onclick="submitScore()" style="width:100%; font-family:'Cormorant Garamond',serif; font-size:18px; font-weight:700; letter-spacing:0.15em; text-transform:uppercase; padding:14px; background:linear-gradient(180deg,#2a6e3a,#163c20); color:#c0f0c8; border:1px solid #4a9e5e; border-radius:8px; cursor:pointer; margin-bottom:10px; transition:opacity 0.15s;">Save Score &amp; Play Again</button>
-      <button onclick="skipScore()" style="width:100%; font-family:'DM Mono',monospace; font-size:11px; letter-spacing:0.15em; text-transform:uppercase; padding:10px; background:transparent; color:var(--text-muted); border:1px solid rgba(201,168,76,0.1); border-radius:8px; cursor:pointer; transition:opacity 0.15s;">Play Again</button>
+      <div style="flex:1; background:rgba(201,168,76,0.06); border:1px solid rgba(201,168,76,0.12); border-radius:10px; padding:14px 10px;">
+        <div style="font-family:'DM Mono',monospace; font-size:9px; letter-spacing:0.2em; text-transform:uppercase; color:var(--text-muted); margin-bottom:6px;">Played</div>
+        <div id="modal-games" style="font-size:20px; font-weight:600; color:var(--cream);"></div>
+      </div>
     </div>
+
+    <button onclick="playAgain()" style="width:100%; font-family:'Cormorant Garamond',serif; font-size:18px; font-weight:700; letter-spacing:0.15em; text-transform:uppercase; padding:14px; background:linear-gradient(180deg,#2a6e3a,#163c20); color:#c0f0c8; border:1px solid #4a9e5e; border-radius:8px; cursor:pointer;">Play Again</button>
   </div>
 </div>
 
@@ -941,14 +1010,6 @@ function toggleMute() {
   document.getElementById('mute-btn').textContent = isMuted ? '🔇 Muted' : '🔇 Sound';
 }
 
-function setQuickBet(amount) {
-  if (gameActive || balance <= 0) return;
-  let v = Math.min(amount, balance);
-  selectedBet = v;
-  document.getElementById('bet-input').value = v;
-  updateUI();
-}
-
 let balance = 100;
 let selectedBet = 10;
 let activeBet = 0;
@@ -959,7 +1020,6 @@ let dealerHand = [];
 let gameActive = false;
 let timeLeft = 180;
 let timerInterval;
-let leaderboard = [];
 
 const suits = ['♥','♦','♣','♠'];
 const values = ['2','3','4','5','6','7','8','9','10','J','Q','K','A'];
@@ -1003,6 +1063,7 @@ function renderCard(card, hidden = false) {
   el.className = 'card ' + (card.red ? 'red' : 'black');
   if (hidden) {
     el.classList.add('back');
+    el.innerHTML = '<div class="card-back-frame"></div>';
   } else {
     el.innerHTML = `
       <div class="corner corner-tl"><span class="rank">${card.value}</span><span class="suit-small">${card.suit}</span></div>
@@ -1081,9 +1142,18 @@ function checkSplitAvailability() {
   document.getElementById('split-btn').disabled = !canSplit;
 }
 
+// Animated dealing: appends a card element to a container after a delay
+function dealCardAnimated(card, container, hidden, delay, callback) {
+  setTimeout(() => {
+    playSound('deal');
+    const el = renderCard(card, hidden);
+    container.appendChild(el);
+    if (callback) callback();
+  }, delay);
+}
+
 function deal() {
   showMessage('Good luck!', '#c9a84c');
-  playSound('deal');
   if (gameActive) return;
   if (selectedBet > balance) { showMessage('Insufficient balance', '#e05252'); return; }
   if (deck.length < 52) createDeck();
@@ -1091,26 +1161,90 @@ function deal() {
   balance -= activeBet;
   updateUI();
   resetHands();
-  playerHands[0].push(deck.pop()); dealerHand.push(deck.pop());
-  playerHands[0].push(deck.pop()); dealerHand.push(deck.pop());
+
+  // Draw all 4 cards up front
+  const p1 = deck.pop(), d1 = deck.pop(), p2 = deck.pop(), d2 = deck.pop();
+  playerHands[0].push(p1); playerHands[0].push(p2);
+  dealerHand.push(d1); dealerHand.push(d2);
+
   gameActive = true;
-  renderHands(true);
   document.getElementById('deal-btn').disabled = true;
-  document.getElementById('hit-btn').disabled = false;
-  document.getElementById('stand-btn').disabled = false;
-  document.getElementById('double-btn').disabled = false;
-  checkSplitAvailability();
-  if (isBlackjack(playerHands[0])) setTimeout(() => stand(), 600);
+  document.getElementById('hit-btn').disabled = true;
+  document.getElementById('stand-btn').disabled = true;
+  document.getElementById('double-btn').disabled = true;
+  document.getElementById('split-btn').disabled = true;
+
+  // Clear areas and set up wrappers
+  const playerEl = document.getElementById('player-hand');
+  const dealerEl = document.getElementById('dealer-hand');
+  const scoreBadge = document.getElementById('dealer-score-badge');
+  playerEl.innerHTML = '';
+  dealerEl.innerHTML = '';
+  scoreBadge.style.display = 'none';
+
+  // Build player wrapper
+  const playerWrapper = document.createElement('div');
+  playerWrapper.className = 'hand-wrapper active-hand';
+  const playerCards = document.createElement('div');
+  playerCards.className = 'hand';
+  const playerScoreEl = document.createElement('div');
+  playerScoreEl.style.textAlign = 'center';
+  playerScoreEl.style.marginTop = '4px';
+  const playerBadge = document.createElement('span');
+  playerBadge.className = 'score-badge';
+  playerScoreEl.appendChild(playerBadge);
+  playerWrapper.appendChild(playerCards);
+  playerWrapper.appendChild(playerScoreEl);
+  playerEl.appendChild(playerWrapper);
+
+  const DELAY = 600; // ms between each card
+
+  // Card 1: player card 1
+  dealCardAnimated(p1, playerCards, false, DELAY * 0, () => {
+    playerBadge.textContent = calculateHandValue(playerHands[0]);
+  });
+  // Card 2: dealer card 1
+  dealCardAnimated(d1, dealerEl, false, DELAY * 1, () => {
+    scoreBadge.style.display = 'inline-block';
+    scoreBadge.textContent = d1.numeric;
+  });
+  // Card 3: player card 2
+  dealCardAnimated(p2, playerCards, false, DELAY * 2, () => {
+    playerBadge.textContent = calculateHandValue(playerHands[0]);
+  });
+  // Card 4: dealer hole card (face down)
+  dealCardAnimated(d2, dealerEl, true, DELAY * 3, () => {
+    // All cards dealt — enable actions
+    document.getElementById('hit-btn').disabled = false;
+    document.getElementById('stand-btn').disabled = false;
+    document.getElementById('double-btn').disabled = false;
+    checkSplitAvailability();
+    if (isBlackjack(playerHands[0])) setTimeout(() => stand(), 700);
+  });
 }
 
 function hit() {
-  playSound('deal');
   if (!gameActive) return;
   const hand = playerHands[currentHandIndex];
-  hand.push(deck.pop());
-  renderHands(true);
+  const card = deck.pop();
+  hand.push(card);
+
+  // Find the active hand's card container and append animated card
+  const wrappers = document.getElementById('player-hand').querySelectorAll('.hand');
+  const targetCards = wrappers[currentHandIndex] || wrappers[wrappers.length - 1];
+
+  playSound('deal');
+  const el = renderCard(card, false);
+  targetCards.appendChild(el);
+
+  // Update score badge
+  const badges = document.getElementById('player-hand').querySelectorAll('.score-badge');
+  if (badges[currentHandIndex]) badges[currentHandIndex].textContent = calculateHandValue(hand);
+  else if (badges[0]) badges[0].textContent = calculateHandValue(hand);
+
   document.getElementById('double-btn').disabled = true;
   document.getElementById('split-btn').disabled = true;
+
   if (calculateHandValue(hand) > 21) {
     if (currentHandIndex < playerHands.length - 1) {
       currentHandIndex++; renderHands(true); checkSplitAvailability();
@@ -1129,9 +1263,32 @@ function stand() {
   document.getElementById('stand-btn').disabled = true;
   document.getElementById('double-btn').disabled = true;
   document.getElementById('split-btn').disabled = true;
-  while (calculateHandValue(dealerHand) < 17) dealerHand.push(deck.pop());
-  renderHands(false);
-  setTimeout(endHand, 800);
+
+  // Reveal dealer hole card first
+  const dealerEl = document.getElementById('dealer-hand');
+  const scoreBadge = document.getElementById('dealer-score-badge');
+
+  // Re-render dealer cards with hole card revealed
+  dealerEl.innerHTML = '';
+  dealerHand.forEach(card => dealerEl.appendChild(renderCard(card, false)));
+  scoreBadge.textContent = calculateHandValue(dealerHand);
+
+  // Then draw extra dealer cards one at a time
+  function drawNextDealerCard() {
+    if (calculateHandValue(dealerHand) < 17) {
+      const card = deck.pop();
+      dealerHand.push(card);
+      setTimeout(() => {
+        playSound('deal');
+        dealerEl.appendChild(renderCard(card, false));
+        scoreBadge.textContent = calculateHandValue(dealerHand);
+        drawNextDealerCard();
+      }, 600);
+    } else {
+      setTimeout(endHand, 600);
+    }
+  }
+  drawNextDealerCard();
 }
 
 function doubleDown() {
@@ -1197,6 +1354,11 @@ function endHand() {
   const wins = results.filter(r => r.includes('WIN') || r.includes('BLACKJACK')).length;
   const busts = results.filter(r => r.includes('BUST')).length;
   const pushes = results.filter(r => r.includes('PUSH')).length;
+  const losses = results.filter(r => r.includes('LOSE') || r.includes('BUST')).length;
+
+  sessionGames++;
+  document.getElementById('session-games').textContent = sessionGames;
+  updateSessionStats(wins, losses);
 
   let finalText = '';
   if (wins === playerHands.length) finalText = isBlackjack(playerHands[0]) && playerHands.length === 1 ? 'Blackjack!' : 'You win!';
@@ -1218,81 +1380,23 @@ function endHand() {
   }, 1500);
 }
 
-const JSONBIN_API_KEY = '$2a$10$3A1O6TpNz93s5rjua8hGw.s6CUd39mBy88XFiUG6ZWwV5ik1A9JlW';
-const JSONBIN_BASE = 'https://api.jsonbin.io/v3';
-const BIN_ID = '69ff8464c0954111d8fd7221';
+// Session stats
+let sessionBest = 100;
+let sessionGames = 0;
+let sessionWins = 0;
+let sessionLosses = 0;
 
-function getMonthKey() {
-  const now = new Date();
-  return `${now.getFullYear()}_${now.getMonth() + 1}`;
+function updateSessionStats(wonHands, lostHands) {
+  if (balance > sessionBest) sessionBest = balance;
+  sessionWins += wonHands;
+  sessionLosses += lostHands;
+  document.getElementById('session-best').textContent = '£' + sessionBest;
+  document.getElementById('session-wins').textContent = sessionWins;
+  document.getElementById('session-losses').textContent = sessionLosses;
 }
 
 function getMonthLabel() {
   return new Date().toLocaleDateString('en-GB', { month: 'long', year: 'numeric' });
-}
-
-async function loadLeaderboard() {
-  document.getElementById('lb-title').textContent = getMonthLabel();
-  leaderboard = [];
-  renderLeaderboard();
-
-  try {
-    const res = await fetch(`${JSONBIN_BASE}/b/${BIN_ID}/latest`, {
-      headers: { 'X-Master-Key': JSONBIN_API_KEY }
-    });
-    if (!res.ok) throw new Error('Fetch failed');
-    const data = await res.json();
-    // Filter to current month's scores only
-    const monthKey = getMonthKey();
-    const all = Array.isArray(data.record) ? data.record : [];
-    leaderboard = all.filter(e => e.month === monthKey);
-  } catch (e) {
-    console.warn('JSONBin load failed:', e);
-    leaderboard = [];
-  }
-
-  renderLeaderboard();
-}
-
-async function saveLeaderboard(name) {
-  const monthKey = getMonthKey();
-
-  // Fetch current full record first
-  let all = [];
-  try {
-    const res = await fetch(`${JSONBIN_BASE}/b/${BIN_ID}/latest`, {
-      headers: { 'X-Master-Key': JSONBIN_API_KEY }
-    });
-    const data = await res.json();
-    all = Array.isArray(data.record) ? data.record : [];
-    // Strip placeholder and old months
-    all = all.filter(e => e.score > 0);
-  } catch {}
-
-  // Add new score with month tag
-  all.push({ name, score: balance, month: monthKey });
-  all.sort((a, b) => b.score - a.score);
-
-  // Keep top 10 per month
-  const thisMonth = all.filter(e => e.month === monthKey).slice(0, 10);
-  const otherMonths = all.filter(e => e.month !== monthKey);
-  const updated = [...thisMonth, ...otherMonths];
-
-  leaderboard = thisMonth;
-  renderLeaderboard();
-
-  try {
-    await fetch(`${JSONBIN_BASE}/b/${BIN_ID}`, {
-      method: 'PUT',
-      headers: {
-        'Content-Type': 'application/json',
-        'X-Master-Key': JSONBIN_API_KEY
-      },
-      body: JSON.stringify(updated)
-    });
-  } catch (e) {
-    console.warn('JSONBin save failed:', e);
-  }
 }
 
 function endGame(busted = false) {
@@ -1308,38 +1412,34 @@ function endGame(busted = false) {
 }
 
 function showEndModal() {
-  const rank = leaderboard.filter(e => e.score > balance).length + 1;
   document.getElementById('modal-balance').textContent = '£' + balance;
-  const canScore = balance > 0;
-  document.getElementById('modal-rank').textContent = canScore
-    ? (rank <= 10 ? '#' + rank + ' on the leaderboard!' : 'Keep practising!')
-    : 'No score to save';
-  document.getElementById('modal-name-section').style.display = canScore ? 'block' : 'none';
-  document.getElementById('modal-save-btn').style.display = canScore ? 'block' : 'none';
+  document.getElementById('modal-best').textContent = '£' + sessionBest;
+  document.getElementById('modal-games').textContent = sessionGames + ' hand' + (sessionGames !== 1 ? 's' : '');
   document.getElementById('end-modal').style.display = 'flex';
-  if (canScore) setTimeout(() => document.getElementById('modal-name-input').focus(), 50);
 }
 
-function submitScore() {
-  const name = document.getElementById('modal-name-input').value.trim() || 'Anonymous';
-  saveLeaderboard(name);
-  document.getElementById('end-modal').style.display = 'none';
-  location.reload();
-}
-
-function skipScore() {
+function playAgain() {
   document.getElementById('end-modal').style.display = 'none';
   location.reload();
 }
 
 function changeBet(amount) {
-  if (gameActive || balance <= 0) return;
+  if (document.getElementById('deal-btn').disabled) return;
   let newBet = selectedBet + amount;
   if (newBet < 5) newBet = 5;
   if (newBet > 100) newBet = 100;
   if (newBet > balance) newBet = balance;
   selectedBet = newBet;
   document.getElementById('bet-input').value = selectedBet;
+  updateUI();
+}
+
+function setQuickBet(amount) {
+  if (document.getElementById('deal-btn').disabled) return;
+  let v = Math.min(amount, balance);
+  if (v < 5) v = 5;
+  selectedBet = v;
+  document.getElementById('bet-input').value = v;
   updateUI();
 }
 
@@ -1353,21 +1453,6 @@ function startTimer() {
   }, 1000);
 }
 
-function renderLeaderboard() {
-  const el = document.getElementById('leaderboard');
-  el.innerHTML = '';
-  if (!leaderboard.length) {
-    el.innerHTML = '<div style="font-size:12px;color:var(--text-muted);text-align:center;padding:20px 0;">No scores yet</div>';
-    return;
-  }
-  leaderboard.forEach((entry, i) => {
-    const row = document.createElement('div');
-    row.className = 'lb-row';
-    row.innerHTML = `<span><span class="lb-rank">#${i+1}</span><span class="lb-name">${entry.name}</span></span><span class="lb-score">£${entry.score}</span>`;
-    el.appendChild(row);
-  });
-}
-
 function startGame() {
   document.getElementById('start-screen').style.display = 'none';
   document.getElementById('game-area').style.display = 'flex';
@@ -1377,9 +1462,8 @@ function startGame() {
 }
 
 window.onload = () => {
-  loadLeaderboard();
   document.getElementById('bet-input').addEventListener('input', (e) => {
-    if (gameActive) return;
+    if (document.getElementById('deal-btn').disabled) return;
     let value = parseInt(e.target.value) || 5;
     if (value < 5) value = 5;
     if (value > 100) value = 100;
