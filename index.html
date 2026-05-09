@@ -751,7 +751,7 @@ header::after {
   <div class="stats">
     <div class="stat">
       <div class="stat-label">Balance</div>
-      <div class="stat-value" id="balance">£100</div>
+      <div class="stat-value" id="balance">$100</div>
     </div>
     <div class="stat-divider"></div>
     <div class="stat">
@@ -761,7 +761,7 @@ header::after {
     <div class="stat-divider"></div>
     <div class="stat">
       <div class="stat-label">Bet</div>
-      <div class="stat-value" id="current-bet">£10</div>
+      <div class="stat-value" id="current-bet">$10</div>
     </div>
   </div>
 </header>
@@ -773,7 +773,7 @@ header::after {
 
     <div style="text-align:center; padding: 24px 0 16px;">
       <div style="font-family:'DM Mono',monospace; font-size:9px; letter-spacing:0.25em; text-transform:uppercase; color:var(--text-muted); margin-bottom:10px;">Best Balance</div>
-      <div id="session-best" style="font-size:42px; font-weight:700; color:var(--gold-light); letter-spacing:0.04em;">£100</div>
+      <div id="session-best" style="font-size:42px; font-weight:700; color:var(--gold-light); letter-spacing:0.04em;">$100</div>
     </div>
 
     <div style="border-top:1px solid rgba(201,168,76,0.1); margin: 8px 0 20px;"></div>
@@ -808,7 +808,7 @@ header::after {
       <div class="start-subtitle"><strong>FREE</strong> Casino Edition &nbsp;·&nbsp; Three Minute Challenge</div>
       <div class="start-divider"></div>
       <div class="start-body">
-        Begin with <strong>£100</strong> and make it count.<br>
+        Begin with <strong>$100</strong> and make it count.<br>
         You have <strong>3 minutes</strong> - play as many hands as you can.<br>
         Prove your nerve.
       </div>
@@ -846,9 +846,9 @@ header::after {
             <button type="button" class="bet-btn" onclick="changeBet(5)">+</button>
           </div>
           <div class="quick-bets">
-            <button type="button" class="quick-bet" onclick="setQuickBet(10)">£10</button>
-            <button type="button" class="quick-bet" onclick="setQuickBet(25)">£25</button>
-            <button type="button" class="quick-bet" onclick="setQuickBet(50)">£50</button>
+            <button type="button" class="quick-bet" onclick="setQuickBet(10)">$10</button>
+            <button type="button" class="quick-bet" onclick="setQuickBet(25)">$25</button>
+            <button type="button" class="quick-bet" onclick="setQuickBet(50)">$50</button>
           </div>
         </div>
 
@@ -1119,8 +1119,8 @@ function renderHands(hideDealer = true) {
 }
 
 function updateUI() {
-  document.getElementById('balance').textContent = `£${balance}`;
-  document.getElementById('current-bet').textContent = `£${selectedBet}`;
+  document.getElementById('balance').textContent = `$${balance}`;
+  document.getElementById('current-bet').textContent = `$${selectedBet}`;
   const mins = Math.floor(timeLeft / 60);
   const secs = timeLeft % 60;
   document.getElementById('timer').textContent = `${mins}:${secs < 10 ? '0' : ''}${secs}`;
@@ -1390,7 +1390,7 @@ function updateSessionStats(wonHands, lostHands) {
   if (balance > sessionBest) sessionBest = balance;
   sessionWins += wonHands;
   sessionLosses += lostHands;
-  document.getElementById('session-best').textContent = '£' + sessionBest;
+  document.getElementById('session-best').textContent = '$' + sessionBest;
   document.getElementById('session-wins').textContent = sessionWins;
   document.getElementById('session-losses').textContent = sessionLosses;
 }
@@ -1412,8 +1412,8 @@ function endGame(busted = false) {
 }
 
 function showEndModal() {
-  document.getElementById('modal-balance').textContent = '£' + balance;
-  document.getElementById('modal-best').textContent = '£' + sessionBest;
+  document.getElementById('modal-balance').textContent = '$' + balance;
+  document.getElementById('modal-best').textContent = '$' + sessionBest;
   document.getElementById('modal-games').textContent = sessionGames + ' hand' + (sessionGames !== 1 ? 's' : '');
   document.getElementById('end-modal').style.display = 'flex';
 }
