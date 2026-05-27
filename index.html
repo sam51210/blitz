@@ -814,14 +814,6 @@ header::after {
             </label>
             <label class="hint-toggle-label" for="hint-toggle">Strategy Hints</label>
           </div>
-          <div class="hint-toggle-wrap" style="margin-top:8px;">
-            <label class="toggle-switch" for="auto-deal-toggle" title="Automatically deal next hand">
-              <input type="checkbox" id="auto-deal-toggle">
-              <div class="toggle-track"></div>
-              <div class="toggle-thumb"></div>
-            </label>
-            <label class="hint-toggle-label" for="auto-deal-toggle">Auto Deal</label>
-          </div>
 
           <div class="bet-row" style="margin-bottom:0;">
             <div class="bet-label">Wager</div>
@@ -1837,14 +1829,13 @@ function endHand() {
   if (totalWinnings > 0) playSound('win'); else playSound('lose');
 
   if (balance <= 0) { setTimeout(() => endGame(true), 1200); return; }
-  const autoDeal = document.getElementById('auto-deal-toggle').checked;
   setTimeout(() => {
     document.getElementById('deal-btn').disabled = false;
     document.getElementById('hit-btn').disabled = true;
     document.getElementById('stand-btn').disabled = true;
     document.getElementById('double-btn').disabled = true;
     document.getElementById('split-btn').disabled = true;
-    if (autoDeal) deal();
+    deal();
   }, 1500);
 }
 
