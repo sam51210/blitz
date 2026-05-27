@@ -67,9 +67,7 @@
   --chip-blue: #1a3a6e;
   --text-muted: rgba(245,240,232,0.45);
 }
-* { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
-button, .action-btn, .start-btn, .skybet-btn, .quick-bet, .bet-btn { touch-action: manipulation; }
-input { -webkit-appearance: none; }
+* { margin: 0; padding: 0; box-sizing: border-box; }
 
 body {
   font-family: 'Cormorant Garamond', Georgia, serif;
@@ -106,7 +104,7 @@ header {
   background: linear-gradient(180deg, #060e06 0%, rgba(6,14,6,0.95) 100%);
   border-bottom: 1px solid var(--gold-dim);
   padding: 0 32px;
-  height: 72px;
+  height: 60px;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -138,15 +136,15 @@ header::after {
 #timer { color: #e05252; font-family: 'DM Mono', monospace; font-size: 20px; }
 .stat-divider { width: 1px; height: 36px; background: linear-gradient(180deg, transparent, var(--gold-dim), transparent); }
 
-.main-container { display: flex; min-height: calc(100vh - 72px); position: relative; z-index: 1; }
+.main-container { display: flex; height: calc(100vh - 60px); height: calc(100dvh - 60px); position: relative; z-index: 1; overflow: hidden; }
 
 /* ---- LEADERBOARD ---- */
 .leaderboard-sidebar {
-  width: 260px;
+  width: 220px;
   flex-shrink: 0;
   background: rgba(4,10,4,0.8);
   border-right: 1px solid rgba(201,168,76,0.2);
-  padding: 28px 20px;
+  padding: 20px 16px;
   overflow-y: auto;
 }
 
@@ -170,7 +168,8 @@ header::after {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 32px 24px 24px;
+  padding: 16px 24px 12px;
+  overflow: hidden;
 }
 
 .game-area {
@@ -178,26 +177,32 @@ header::after {
   flex-direction: column;
   width: 100%;
   max-width: 780px;
+  flex: 1;
+  overflow: hidden;
 }
 
 .table-surface {
   background: radial-gradient(ellipse at 50% 30%, #1a4a28 0%, #0d2b1a 55%, #081710 100%);
-  border-radius: 120px;
-  padding: 40px 50px;
+  border-radius: 80px;
+  padding: 20px 40px;
   border: 3px solid var(--gold-dim);
   box-shadow: inset 0 0 80px rgba(0,0,0,0.5), 0 0 0 8px #06100a, 0 0 0 10px var(--gold-dim), 0 20px 60px rgba(0,0,0,0.7);
-  margin-bottom: 28px;
+  margin-bottom: 12px;
   position: relative;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
 }
 .table-surface::before { content: ''; position: absolute; inset: 6px; border-radius: 114px; border: 1px solid rgba(201,168,76,0.12); pointer-events: none; }
 
-.zone-label { font-family: 'DM Mono', monospace; font-size: 9px; letter-spacing: 0.3em; text-transform: uppercase; color: rgba(201,168,76,0.35); margin-bottom: 14px; text-align: center; }
+.zone-label { font-family: 'DM Mono', monospace; font-size: 9px; letter-spacing: 0.3em; text-transform: uppercase; color: rgba(201,168,76,0.35); margin-bottom: 6px; text-align: center; }
 
-.hand { display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; min-height: 150px; align-items: center; margin: 4px 0 12px; }
+.hand { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; min-height: 110px; align-items: center; margin: 2px 0 6px; }
 
 /* ---- CARDS ---- */
 .card {
-  width: 96px; height: 136px;
+  width: 76px; height: 108px;
   background: #fffef9;
   border-radius: 10px;
   position: relative;
@@ -230,9 +235,9 @@ header::after {
 .card .corner { position: absolute; display: flex; flex-direction: column; align-items: center; line-height: 1; font-family: 'Cormorant Garamond', serif; z-index: 3; }
 .card .corner-tl { top: 7px; left: 9px; }
 .card .corner-br { bottom: 7px; right: 9px; transform: rotate(180deg); }
-.card .corner .rank { font-size: 22px; font-weight: 700; letter-spacing: -0.02em; line-height: 1; }
-.card .corner .suit-small { font-size: 14px; line-height: 1; margin-top: 1px; }
-.card .suit-center { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); font-size: 52px; line-height: 1; z-index: 3; filter: drop-shadow(0 1px 2px rgba(0,0,0,0.18)); }
+.card .corner .rank { font-size: 17px; font-weight: 700; letter-spacing: -0.02em; line-height: 1; }
+.card .corner .suit-small { font-size: 11px; line-height: 1; margin-top: 1px; }
+.card .suit-center { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); font-size: 40px; line-height: 1; z-index: 3; filter: drop-shadow(0 1px 2px rgba(0,0,0,0.18)); }
 
 .card.back { background: #0f1a5c; color: transparent; overflow: hidden; }
 .card.back::before {
@@ -250,7 +255,7 @@ header::after {
 .score-badge { display: inline-block; background: rgba(0,0,0,0.35); border: 1px solid rgba(201,168,76,0.25); border-radius: 4px; padding: 2px 10px; font-family: 'DM Mono', monospace; font-size: 14px; color: var(--gold-light); margin-left: 8px; vertical-align: middle; }
 
 /* ---- MESSAGE ---- */
-.message-wrap { text-align: center; margin: 4px 0 12px; min-height: 44px; display: flex; align-items: center; justify-content: center; }
+.message-wrap { text-align: center; margin: 2px 0 6px; min-height: 34px; display: flex; align-items: center; justify-content: center; }
 .message { font-size: 22px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; transition: color 0.3s; text-shadow: 0 2px 12px rgba(0,0,0,0.5); }
 
 /* ═══════════════════════════════════════
@@ -258,7 +263,7 @@ header::after {
 ═══════════════════════════════════════ */
 .hint-panel {
   position: relative;
-  margin: 0 0 14px;
+  margin: 0 0 8px;
   min-height: 0;
   overflow: hidden;
   transition: max-height 0.4s cubic-bezier(0.22,1,0.28,1), opacity 0.35s ease, transform 0.4s cubic-bezier(0.22,1,0.28,1);
@@ -268,7 +273,7 @@ header::after {
 }
 
 .hint-panel.visible {
-  max-height: 160px;
+  max-height: 120px;
   opacity: 1;
   transform: translateY(0);
 }
@@ -287,21 +292,21 @@ header::after {
 
 /* Bold solid colour slab on the left */
 .hint-slab {
-  width: 88px;
-  min-width: 88px;
+  width: 76px;
+  min-width: 76px;
   align-self: stretch;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 4px;
+  gap: 3px;
   background: var(--hint-slab-color, var(--gold));
-  padding: 16px 8px;
+  padding: 10px 8px;
   transition: background 0.3s;
 }
 
 .hint-slab-icon {
-  font-size: 26px;
+  font-size: 20px;
   line-height: 1;
 }
 
@@ -316,27 +321,26 @@ header::after {
   line-height: 1.2;
 }
 
-/* Text area */
 .hint-text-wrap {
   flex: 1;
-  padding: 14px 20px;
+  padding: 8px 16px;
 }
 
 .hint-action {
   font-family: 'Cormorant Garamond', serif;
-  font-size: 20px;
+  font-size: 17px;
   font-weight: 700;
   letter-spacing: 0.06em;
   text-transform: uppercase;
-  margin-bottom: 5px;
+  margin-bottom: 3px;
   color: var(--hint-text-color, var(--gold-light));
   transition: color 0.3s;
   line-height: 1;
 }
 
 .hint-reason {
-  font-size: 13.5px;
-  line-height: 1.55;
+  font-size: 12px;
+  line-height: 1.45;
   color: rgba(245,240,232,0.72);
 }
 
@@ -361,7 +365,7 @@ header::after {
   background: rgba(4,10,4,0.85);
   border: 1px solid rgba(201,168,76,0.15);
   border-radius: 16px;
-  padding: 24px 28px;
+  padding: 14px 20px;
   backdrop-filter: blur(8px);
 }
 
@@ -370,7 +374,7 @@ header::after {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 18px;
+  margin-bottom: 10px;
 }
 
 .hint-toggle-wrap {
@@ -431,7 +435,7 @@ header::after {
   align-items: center;
   justify-content: center;
   gap: 0;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
 }
 
 .bet-label { font-family: 'DM Mono', monospace; font-size: 9px; letter-spacing: 0.25em; text-transform: uppercase; color: var(--text-muted); margin-right: 14px; }
@@ -452,10 +456,10 @@ header::after {
 
 .action-btn {
   font-family: 'Cormorant Garamond', serif;
-  font-size: 16px; font-weight: 600;
+  font-size: 15px; font-weight: 600;
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  padding: 12px 28px;
+  padding: 9px 22px;
   border-radius: 7px;
   cursor: pointer;
   transition: all 0.18s ease;
@@ -467,8 +471,9 @@ header::after {
 .action-btn:hover:not(:disabled)::before { background: rgba(255,255,255,0.06); }
 .action-btn:active:not(:disabled) { transform: scale(0.97); }
 .action-btn:disabled { opacity: 0.25; cursor: not-allowed; }
+.action-btn { touch-action: manipulation; -webkit-tap-highlight-color: transparent; }
 
-.btn-deal { background: linear-gradient(180deg, #2a6e3a 0%, #1a4d27 100%); border-color: #3a8e4f; color: #c8f0d0; box-shadow: 0 4px 16px rgba(26,77,39,0.5), inset 0 1px 0 rgba(255,255,255,0.12); font-size: 18px; padding: 14px 40px; }
+.btn-deal { background: linear-gradient(180deg, #2a6e3a 0%, #1a4d27 100%); border-color: #3a8e4f; color: #c8f0d0; box-shadow: 0 4px 16px rgba(26,77,39,0.5), inset 0 1px 0 rgba(255,255,255,0.12); font-size: 17px; padding: 11px 32px; }
 .btn-deal:hover:not(:disabled) { background: linear-gradient(180deg, #358048 0%, #1f5a2e 100%); box-shadow: 0 6px 20px rgba(26,77,39,0.65), inset 0 1px 0 rgba(255,255,255,0.15); }
 .btn-hit { background: rgba(30,60,40,0.6); border-color: rgba(80,160,100,0.4); color: #90e0a0; }
 .btn-hit:hover:not(:disabled) { border-color: rgba(80,160,100,0.7); color: #b0f0b8; }
@@ -559,148 +564,134 @@ header::after {
 }
 .skybet-btn:active { transform: translateY(0); }
 
-/* ═══════════════════════════════════════
-   TABLET  (≤860px)
-═══════════════════════════════════════ */
 @media (max-width: 860px) {
-  .main-container { flex-direction: column; }
-  .leaderboard-sidebar { width: 100%; border-right: none; border-bottom: 1px solid rgba(201,168,76,0.15); padding: 16px 20px; }
-  .table-surface { padding: 24px 20px; border-radius: 60px; }
-  .start-title { font-size: 42px; }
-  .controls-top-row { flex-direction: column; align-items: flex-start; gap: 14px; }
-  .bet-row { flex-wrap: wrap; gap: 10px; }
-  .skybet-btn { font-size: 12px; padding: 8px 14px; letter-spacing: 0.06em; }
-  .stat-divider:last-of-type { display: none; }
-}
-
-/* ═══════════════════════════════════════
-   MOBILE  (≤600px)
-═══════════════════════════════════════ */
-@media (max-width: 600px) {
-
-  /* HEADER — compact two-row layout */
+  /* ── Header ── */
   header {
     height: auto;
-    flex-direction: column;
-    align-items: stretch;
-    padding: 10px 14px 8px;
+    padding: 10px 16px;
+    flex-wrap: wrap;
     gap: 8px;
   }
-  .logo { font-size: 20px; text-align: center; }
+  .logo { font-size: 20px; }
+  .stats { gap: 14px; flex-wrap: wrap; }
+  .stat-value { font-size: 18px; }
+  #timer { font-size: 17px; }
+  .stat-divider { height: 26px; }
+  .skybet-btn { font-size: 11px; padding: 7px 13px; letter-spacing: 0.06em; }
 
-  /* Stats row — spread across full width */
-  .stats {
-    gap: 0;
-    justify-content: space-between;
-    width: 100%;
-    flex-wrap: wrap;
-  }
-  .stat { flex: 1; min-width: 0; }
-  .stat-label { font-size: 8px; letter-spacing: 0.14em; }
-  .stat-value { font-size: 16px; }
-  #timer { font-size: 15px; }
-
-  /* Hide all dividers in stats, rely on spacing */
-  .stat-divider { display: none; }
-
-  /* Sky Bet button — full width below stats */
-  .skybet-btn {
-    width: 100%;
-    justify-content: center;
-    font-size: 13px;
-    padding: 10px 16px;
-    letter-spacing: 0.1em;
-    border-radius: 6px;
-    margin-top: 4px;
+  /* ── Layout ── */
+  .main-container {
+    flex-direction: column;
+    height: auto;
+    min-height: calc(100vh - 60px);
+    overflow: visible;
   }
 
-  /* MAIN LAYOUT */
-  .main-container { flex-direction: column; }
-  .game-container { padding: 16px 10px 16px; }
-
-  /* Hide leaderboard sidebar on mobile to maximise game space */
+  /* Hide sidebar on mobile — stats are in header */
   .leaderboard-sidebar { display: none; }
 
-  /* TABLE SURFACE — shrink and flatten */
+  /* ── Game container ── */
+  .game-container {
+    padding: 10px 12px 12px;
+    overflow: visible;
+  }
+
+  .game-area {
+    flex: none;
+    width: 100%;
+  }
+
+  /* ── Table surface ── */
   .table-surface {
-    padding: 20px 12px;
-    border-radius: 32px;
-    border-width: 2px;
-    box-shadow: inset 0 0 40px rgba(0,0,0,0.5), 0 0 0 4px #06100a, 0 0 0 6px var(--gold-dim), 0 10px 30px rgba(0,0,0,0.7);
-    margin-bottom: 16px;
+    border-radius: 40px;
+    padding: 14px 16px;
+    margin-bottom: 10px;
+    flex: none;
   }
 
-  /* CARDS — smaller on mobile */
-  .card {
-    width: 68px;
-    height: 98px;
-    border-radius: 7px;
-  }
-  .card .corner .rank { font-size: 16px; }
-  .card .corner .suit-small { font-size: 10px; }
-  .card .suit-center { font-size: 36px; }
-  .hand { gap: 8px; min-height: 110px; }
+  /* ── Cards ── */
+  .card { width: 60px; height: 86px; border-radius: 7px; }
+  .card .corner .rank { font-size: 13px; }
+  .card .corner .suit-small { font-size: 9px; }
+  .card .suit-center { font-size: 30px; }
+  .card .corner-tl { top: 5px; left: 6px; }
+  .card .corner-br { bottom: 5px; right: 6px; }
+  .hand { gap: 6px; min-height: 86px; margin: 2px 0 4px; }
 
-  /* CONTROLS */
-  .controls-panel { padding: 16px 12px; border-radius: 12px; }
-  .controls-top-row { flex-direction: row; align-items: center; justify-content: space-between; gap: 8px; margin-bottom: 14px; }
-  .hint-toggle-label { font-size: 8px; }
+  /* ── Zone labels ── */
+  .zone-label { margin-bottom: 4px; }
 
-  /* BET ROW — centred and tighter */
-  .bet-row { justify-content: center; gap: 8px; margin-bottom: 14px; }
-  .bet-label { font-size: 8px; margin-right: 8px; }
-  .bet-controls { border-radius: 6px; }
-  .bet-btn { width: 36px; height: 36px; font-size: 18px; }
-  #bet-input { width: 60px; height: 36px; font-size: 14px; }
-  .quick-bets { gap: 4px; margin-left: 8px; }
-  .quick-bet { padding: 5px 9px; font-size: 10px; }
-
-  /* ACTION BUTTONS — 2×2 grid on mobile */
-  .actions { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
-  .action-btn { font-size: 15px; padding: 13px 10px; letter-spacing: 0.08em; }
-  .btn-deal { grid-column: 1 / -1; font-size: 17px; padding: 15px 10px; }
-
-  /* MESSAGE */
+  /* ── Message ── */
+  .message-wrap { margin: 4px 0 6px; min-height: 28px; }
   .message { font-size: 18px; }
-  .message-wrap { min-height: 36px; margin: 4px 0 10px; }
 
-  /* ZONE LABELS */
-  .zone-label { font-size: 8px; letter-spacing: 0.2em; margin-bottom: 10px; }
-  .score-badge { font-size: 12px; padding: 2px 7px; }
+  /* ── Hint panel ── */
+  .hint-panel { margin: 0 0 6px; }
+  .hint-slab { width: 62px; min-width: 62px; padding: 8px 6px; }
+  .hint-slab-icon { font-size: 17px; }
+  .hint-text-wrap { padding: 8px 12px; }
+  .hint-action { font-size: 15px; }
+  .hint-reason { font-size: 11px; line-height: 1.4; }
 
-  /* HINT PANEL */
-  .hint-slab { width: 70px; min-width: 70px; padding: 12px 6px; }
-  .hint-slab-icon { font-size: 22px; }
-  .hint-slab-word { font-size: 8px; }
-  .hint-action { font-size: 17px; }
-  .hint-reason { font-size: 12px; }
-  .hint-text-wrap { padding: 12px 14px; }
+  /* ── Controls panel ── */
+  .controls-panel { padding: 12px 14px; border-radius: 14px; }
 
-  /* START SCREEN */
-  .start-screen { padding: 30px 20px; }
-  .start-ornament { font-size: 40px; margin-bottom: 18px; }
-  .start-title { font-size: 34px; letter-spacing: 0.1em; }
-  .start-subtitle { font-size: 9px; letter-spacing: 0.25em; margin-bottom: 28px; }
-  .start-divider { width: 240px; margin-bottom: 24px; }
-  .start-body { font-size: 15px; line-height: 1.7; margin-bottom: 32px; padding: 0 8px; }
-  .start-btn { font-size: 17px; padding: 15px 44px; letter-spacing: 0.14em; }
+  .controls-top-row {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    gap: 10px;
+  }
 
-  /* END MODAL */
-  .end-modal-inner { padding: 32px 20px; margin: 20px; }
+  /* Stack the two toggles vertically */
+  .controls-top-row > div:first-child {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
 
-  /* MUTE BUTTON — smaller, more discrete */
-  #mute-btn { bottom: 12px; right: 12px; font-size: 10px; padding: 8px 12px; }
+  /* ── Bet row ── */
+  .bet-row { flex-wrap: wrap; gap: 8px; margin-bottom: 10px; justify-content: center; }
+  .bet-label { margin-right: 8px; }
+  .bet-btn { width: 44px; height: 44px; font-size: 22px; }
+  #bet-input { width: 72px; height: 44px; font-size: 15px; }
+  .quick-bets { margin-left: 8px; gap: 5px; }
+  .quick-bet { padding: 8px 10px; font-size: 11px; }
 
-  /* SEO SECTION */
-  .seo-content { padding: 48px 16px 56px; }
-  .seo-heading { font-size: 24px; }
-  .seo-subheading { font-size: 17px; }
-  .seo-content p { font-size: 14px; }
-  .strategy-grid { grid-template-columns: 1fr; }
-  .seo-cta-btn { font-size: 16px; padding: 14px 36px; }
+  /* ── Action buttons — full-width grid on mobile ── */
+  .actions {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+    margin-top: 10px !important;
+  }
 
-  /* HAND WRAPPER */
-  .hand-wrapper { padding: 8px 10px; }
+  .action-btn {
+    font-size: 16px;
+    padding: 14px 10px;
+    letter-spacing: 0.08em;
+    border-radius: 10px;
+    min-height: 52px;
+    touch-action: manipulation;
+  }
+
+  /* Deal spans full width */
+  .btn-deal {
+    grid-column: 1 / -1;
+    font-size: 18px;
+    padding: 15px;
+  }
+
+  /* ── Start screen ── */
+  .start-title { font-size: 38px; }
+  .start-ornament { font-size: 38px; margin-bottom: 16px; }
+  .start-body { font-size: 15px; margin-bottom: 32px; }
+  .start-btn { font-size: 17px; padding: 16px 48px; }
+  .start-divider { margin-bottom: 24px; }
+
+  /* ── Mute button ── */
+  #mute-btn { bottom: 14px; right: 14px; font-size: 10px; padding: 8px 12px; }
 }
 </style>
 </head>
@@ -735,30 +726,30 @@ header::after {
   <div class="leaderboard-sidebar">
     <div class="lb-title">This Session</div>
 
-    <div style="text-align:center; padding: 24px 0 16px;">
-      <div style="font-family:'DM Mono',monospace; font-size:9px; letter-spacing:0.25em; text-transform:uppercase; color:var(--text-muted); margin-bottom:10px;">Best Balance</div>
-      <div id="session-best" style="font-size:42px; font-weight:700; color:var(--gold-light); letter-spacing:0.04em;">$100</div>
+    <div style="text-align:center; padding: 12px 0 8px;">
+      <div style="font-family:'DM Mono',monospace; font-size:9px; letter-spacing:0.25em; text-transform:uppercase; color:var(--text-muted); margin-bottom:6px;">Best Balance</div>
+      <div id="session-best" style="font-size:32px; font-weight:700; color:var(--gold-light); letter-spacing:0.04em;">$100</div>
     </div>
 
-    <div style="border-top:1px solid rgba(201,168,76,0.1); margin: 8px 0 20px;"></div>
+    <div style="border-top:1px solid rgba(201,168,76,0.1); margin: 4px 0 12px;"></div>
 
     <div style="text-align:center;">
-      <div style="font-family:'DM Mono',monospace; font-size:9px; letter-spacing:0.25em; text-transform:uppercase; color:var(--text-muted); margin-bottom:10px;">Games Played</div>
-      <div id="session-games" style="font-size:28px; font-weight:600; color:var(--cream);">0</div>
+      <div style="font-family:'DM Mono',monospace; font-size:9px; letter-spacing:0.25em; text-transform:uppercase; color:var(--text-muted); margin-bottom:6px;">Games Played</div>
+      <div id="session-games" style="font-size:22px; font-weight:600; color:var(--cream);">0</div>
     </div>
 
-    <div style="border-top:1px solid rgba(201,168,76,0.1); margin: 20px 0;"></div>
+    <div style="border-top:1px solid rgba(201,168,76,0.1); margin: 12px 0;"></div>
 
     <div style="text-align:center;">
-      <div style="font-family:'DM Mono',monospace; font-size:9px; letter-spacing:0.25em; text-transform:uppercase; color:var(--text-muted); margin-bottom:10px;">Hands Won</div>
-      <div id="session-wins" style="font-size:28px; font-weight:600; color:#80e090;">0</div>
+      <div style="font-family:'DM Mono',monospace; font-size:9px; letter-spacing:0.25em; text-transform:uppercase; color:var(--text-muted); margin-bottom:6px;">Hands Won</div>
+      <div id="session-wins" style="font-size:22px; font-weight:600; color:#80e090;">0</div>
     </div>
 
-    <div style="border-top:1px solid rgba(201,168,76,0.1); margin: 20px 0;"></div>
+    <div style="border-top:1px solid rgba(201,168,76,0.1); margin: 12px 0;"></div>
 
     <div style="text-align:center;">
-      <div style="font-family:'DM Mono',monospace; font-size:9px; letter-spacing:0.25em; text-transform:uppercase; color:var(--text-muted); margin-bottom:10px;">Hands Lost</div>
-      <div id="session-losses" style="font-size:28px; font-weight:600; color:#e05252;">0</div>
+      <div style="font-family:'DM Mono',monospace; font-size:9px; letter-spacing:0.25em; text-transform:uppercase; color:var(--text-muted); margin-bottom:6px;">Hands Lost</div>
+      <div id="session-losses" style="font-size:22px; font-weight:600; color:#e05252;">0</div>
     </div>
 
   </div>
@@ -785,10 +776,10 @@ header::after {
       <div class="table-surface">
         <div class="zone-label">Dealer</div>
         <div class="hand" id="dealer-hand"></div>
-        <div style="text-align:center; margin-bottom:10px;">
+        <div style="text-align:center; margin-bottom:4px;">
           <span id="dealer-score-badge" class="score-badge" style="display:none;"></span>
         </div>
-        <div style="border-top:1px solid rgba(201,168,76,0.1); margin: 8px 0 16px;"></div>
+        <div style="border-top:1px solid rgba(201,168,76,0.1); margin: 4px 0 8px;"></div>
         <div class="zone-label">Player</div>
         <div id="player-hand"></div>
       </div>
@@ -823,6 +814,14 @@ header::after {
             </label>
             <label class="hint-toggle-label" for="hint-toggle">Strategy Hints</label>
           </div>
+          <div class="hint-toggle-wrap" style="margin-top:8px;">
+            <label class="toggle-switch" for="auto-deal-toggle" title="Automatically deal next hand">
+              <input type="checkbox" id="auto-deal-toggle">
+              <div class="toggle-track"></div>
+              <div class="toggle-thumb"></div>
+            </label>
+            <label class="hint-toggle-label" for="auto-deal-toggle">Auto Deal</label>
+          </div>
 
           <div class="bet-row" style="margin-bottom:0;">
             <div class="bet-label">Wager</div>
@@ -856,21 +855,43 @@ header::after {
 
 <!-- End-game modal -->
 <div id="end-modal" style="display:none; position:fixed; inset:0; z-index:300; align-items:center; justify-content:center; background:rgba(2,7,2,0.88);">
-  <div style="background:linear-gradient(180deg,#0d1f0d,#060e06); border:1px solid rgba(201,168,76,0.35); border-radius:18px; padding:44px 48px; max-width:400px; width:90%; text-align:center; box-shadow:0 24px 80px rgba(0,0,0,0.8), 0 0 0 1px rgba(201,168,76,0.08);">
-    <div style="font-size:32px; letter-spacing:6px; margin-bottom:20px; color:var(--gold);">♠ ♥ ♦ ♣</div>
-    <div style="font-family:'DM Mono',monospace; font-size:10px; letter-spacing:0.3em; text-transform:uppercase; color:var(--text-muted); margin-bottom:6px;">Final Balance</div>
-    <div id="modal-balance" style="font-size:52px; font-weight:700; color:var(--gold-light); margin-bottom:24px; letter-spacing:0.04em;"></div>
-    <div style="display:flex; gap:16px; margin-bottom:28px;">
-      <div style="flex:1; background:rgba(201,168,76,0.06); border:1px solid rgba(201,168,76,0.12); border-radius:10px; padding:14px 10px;">
-        <div style="font-family:'DM Mono',monospace; font-size:9px; letter-spacing:0.2em; text-transform:uppercase; color:var(--text-muted); margin-bottom:6px;">Best</div>
+  <div style="background:linear-gradient(180deg,#0d1f0d,#060e06); border:1px solid rgba(201,168,76,0.35); border-radius:18px; padding:32px 40px; max-width:460px; width:90%; text-align:center; box-shadow:0 24px 80px rgba(0,0,0,0.8), 0 0 0 1px rgba(201,168,76,0.08);">
+    <div style="font-size:28px; letter-spacing:6px; margin-bottom:12px; color:var(--gold);">♠ ♥ ♦ ♣</div>
+    <div style="font-family:'DM Mono',monospace; font-size:10px; letter-spacing:0.3em; text-transform:uppercase; color:var(--text-muted); margin-bottom:4px;">Final Balance</div>
+    <div id="modal-balance" style="font-size:52px; font-weight:700; color:var(--gold-light); margin-bottom:20px; letter-spacing:0.04em;"></div>
+
+    <!-- Top row: Best + Hands Played -->
+    <div style="display:flex; gap:10px; margin-bottom:10px;">
+      <div style="flex:1; background:rgba(201,168,76,0.06); border:1px solid rgba(201,168,76,0.12); border-radius:10px; padding:12px 8px;">
+        <div style="font-family:'DM Mono',monospace; font-size:9px; letter-spacing:0.2em; text-transform:uppercase; color:var(--text-muted); margin-bottom:5px;">Best Balance</div>
         <div id="modal-best" style="font-size:20px; font-weight:600; color:var(--gold-light);"></div>
       </div>
-      <div style="flex:1; background:rgba(201,168,76,0.06); border:1px solid rgba(201,168,76,0.12); border-radius:10px; padding:14px 10px;">
-        <div style="font-family:'DM Mono',monospace; font-size:9px; letter-spacing:0.2em; text-transform:uppercase; color:var(--text-muted); margin-bottom:6px;">Played</div>
+      <div style="flex:1; background:rgba(201,168,76,0.06); border:1px solid rgba(201,168,76,0.12); border-radius:10px; padding:12px 8px;">
+        <div style="font-family:'DM Mono',monospace; font-size:9px; letter-spacing:0.2em; text-transform:uppercase; color:var(--text-muted); margin-bottom:5px;">Hands Played</div>
         <div id="modal-games" style="font-size:20px; font-weight:600; color:var(--cream);"></div>
       </div>
     </div>
-    <button onclick="playAgain()" style="width:100%; font-family:'Cormorant Garamond',serif; font-size:18px; font-weight:700; letter-spacing:0.15em; text-transform:uppercase; padding:14px; background:linear-gradient(180deg,#2a6e3a,#163c20); color:#c0f0c8; border:1px solid #4a9e5e; border-radius:8px; cursor:pointer;">Play Again</button>
+
+    <!-- Bottom row: Won + Lost -->
+    <div style="display:flex; gap:10px; margin-bottom:22px;">
+      <div style="flex:1; background:rgba(128,224,144,0.06); border:1px solid rgba(128,224,144,0.15); border-radius:10px; padding:12px 8px;">
+        <div style="font-family:'DM Mono',monospace; font-size:9px; letter-spacing:0.2em; text-transform:uppercase; color:var(--text-muted); margin-bottom:5px;">Hands Won</div>
+        <div id="modal-wins" style="font-size:20px; font-weight:600; color:#80e090;"></div>
+      </div>
+      <div style="flex:1; background:rgba(224,82,82,0.06); border:1px solid rgba(224,82,82,0.15); border-radius:10px; padding:12px 8px;">
+        <div style="font-family:'DM Mono',monospace; font-size:9px; letter-spacing:0.2em; text-transform:uppercase; color:var(--text-muted); margin-bottom:5px;">Hands Lost</div>
+        <div id="modal-losses" style="font-size:20px; font-weight:600; color:#e05252;"></div>
+      </div>
+    </div>
+
+    <!-- Share + Play Again -->
+    <div style="display:flex; gap:10px;">
+      <button onclick="shareResult()" id="share-btn" style="flex:1; font-family:'Cormorant Garamond',serif; font-size:16px; font-weight:700; letter-spacing:0.12em; text-transform:uppercase; padding:13px 10px; background:rgba(201,168,76,0.08); color:var(--gold-light); border:1px solid rgba(201,168,76,0.35); border-radius:8px; cursor:pointer; transition:all 0.2s; display:flex; align-items:center; justify-content:center; gap:8px;">
+        <span id="share-icon">↗</span> Share
+      </button>
+      <button onclick="playAgain()" style="flex:2; font-family:'Cormorant Garamond',serif; font-size:18px; font-weight:700; letter-spacing:0.15em; text-transform:uppercase; padding:13px; background:linear-gradient(180deg,#2a6e3a,#163c20); color:#c0f0c8; border:1px solid #4a9e5e; border-radius:8px; cursor:pointer;">Play Again</button>
+    </div>
+    <div id="share-feedback" style="font-family:'DM Mono',monospace; font-size:10px; letter-spacing:0.15em; color:var(--gold); margin-top:10px; min-height:16px; opacity:0; transition:opacity 0.3s;"></div>
   </div>
 </div>
 
@@ -1585,6 +1606,7 @@ function deal() {
   if (gameActive) return;
   if (selectedBet > balance) { showMessage('Insufficient balance', '#e05252'); return; }
   if (deck.length < 52) createDeck();
+  if (!timerInterval) startTimer(); // start on first deal
   activeBet = selectedBet;
   balance -= activeBet;
   updateUI();
@@ -1671,6 +1693,16 @@ function hit() {
       showHint();
     } else {
       setTimeout(endHand, 700);
+    }
+  } else if (calculateHandValue(hand) === 21) {
+    // Auto-stand on 21
+    if (currentHandIndex < playerHands.length - 1) {
+      currentHandIndex++;
+      renderHands(true);
+      checkSplitAvailability();
+      showHint();
+    } else {
+      setTimeout(stand, 700);
     }
   } else {
     showHint(); // ← refresh hint after each hit
@@ -1805,12 +1837,14 @@ function endHand() {
   if (totalWinnings > 0) playSound('win'); else playSound('lose');
 
   if (balance <= 0) { setTimeout(() => endGame(true), 1200); return; }
+  const autoDeal = document.getElementById('auto-deal-toggle').checked;
   setTimeout(() => {
     document.getElementById('deal-btn').disabled = false;
     document.getElementById('hit-btn').disabled = true;
     document.getElementById('stand-btn').disabled = true;
     document.getElementById('double-btn').disabled = true;
     document.getElementById('split-btn').disabled = true;
+    if (autoDeal) deal();
   }, 1500);
 }
 
@@ -1848,7 +1882,42 @@ function showEndModal() {
   document.getElementById('modal-balance').textContent = '$' + balance;
   document.getElementById('modal-best').textContent = '$' + sessionBest;
   document.getElementById('modal-games').textContent = sessionGames + ' hand' + (sessionGames !== 1 ? 's' : '');
+  document.getElementById('modal-wins').textContent = sessionWins;
+  document.getElementById('modal-losses').textContent = sessionLosses;
   document.getElementById('end-modal').style.display = 'flex';
+}
+
+function shareResult() {
+  const winRate = sessionGames > 0 ? Math.round((sessionWins / sessionGames) * 100) : 0;
+  const profit = balance - 100;
+  const profitStr = profit >= 0 ? '+$' + profit : '-$' + Math.abs(profit);
+  const text = `♠ Blitz Blackjack 3-Min Challenge\n` +
+    `💰 Final Balance: $${balance} (${profitStr})\n` +
+    `🏆 Best: $${sessionBest}\n` +
+    `🃏 Hands: ${sessionGames} played · ${sessionWins} won · ${sessionLosses} lost · ${winRate}% win rate\n` +
+    `🎮 Play free at blitzblackjack.com`;
+
+  const feedback = document.getElementById('share-feedback');
+
+  if (navigator.share) {
+    navigator.share({ title: 'Blitz Blackjack', text })
+      .then(() => {
+        feedback.textContent = 'Shared!';
+        feedback.style.opacity = '1';
+        setTimeout(() => { feedback.style.opacity = '0'; }, 2500);
+      })
+      .catch(() => {});
+  } else {
+    navigator.clipboard.writeText(text).then(() => {
+      feedback.textContent = 'Result copied to clipboard ✓';
+      feedback.style.opacity = '1';
+      setTimeout(() => { feedback.style.opacity = '0'; }, 2500);
+    }).catch(() => {
+      feedback.textContent = 'Copy failed — try manually';
+      feedback.style.opacity = '1';
+      setTimeout(() => { feedback.style.opacity = '0'; }, 2500);
+    });
+  }
 }
 
 function playAgain() {
@@ -1891,7 +1960,6 @@ function startGame() {
   document.getElementById('game-area').style.display = 'flex';
   updateUI();
   createDeck();
-  startTimer();
 }
 
 window.onload = () => {
