@@ -1898,11 +1898,11 @@ function endHand() {
 
   if (balance <= 0) { setTimeout(() => endGame(true), 1200); return; }
   setTimeout(() => {
-    document.getElementById('deal-btn').disabled = false;
     document.getElementById('hit-btn').disabled = true;
     document.getElementById('stand-btn').disabled = true;
     document.getElementById('double-btn').disabled = true;
     document.getElementById('split-btn').disabled = true;
+    deal();
   }, 1500);
 }
 
