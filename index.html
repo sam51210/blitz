@@ -489,9 +489,12 @@ header::after {
   justify-content: center;
   align-items: center;
   gap: 0;
-  z-index: 200;
+  z-index: 10000;
+  overflow-y: auto;
+  padding: 20px 20px 100px;
 }
-.start-screen::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at 30% 50%, rgba(201,168,76,0.04) 0%, transparent 60%), radial-gradient(ellipse at 70% 50%, rgba(26,77,39,0.08) 0%, transparent 60%); }
+.start-screen > * { position: relative; z-index: 1; }
+.start-screen::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at 30% 50%, rgba(201,168,76,0.04) 0%, transparent 60%), radial-gradient(ellipse at 70% 50%, rgba(26,77,39,0.08) 0%, transparent 60%); pointer-events: none; }
 
 .start-ornament { font-size: 56px; margin-bottom: 24px; opacity: 0.9; letter-spacing: 6px; }
 .start-title { font-size: 64px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--gold-light); margin-bottom: 6px; text-shadow: 0 0 60px rgba(201,168,76,0.3); position: relative; }
@@ -702,6 +705,57 @@ header::after {
   /* HAND WRAPPER */
   .hand-wrapper { padding: 8px 10px; }
 }
+
+/* ── COMPLIANCE STYLES ── */
+.age-badge {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 28px; height: 28px; border-radius: 50%;
+  background: var(--gold); color: #000;
+  font-family: 'DM Mono', monospace; font-size: 10px; font-weight: 700;
+  letter-spacing: -0.02em; flex-shrink: 0; line-height: 1;
+}
+.bga-logo {
+  display: inline-flex; align-items: center; gap: 6px;
+  background: #fff; border-radius: 4px; padding: 4px 8px;
+  text-decoration: none; flex-shrink: 0;
+}
+.bga-logo span { font-family: Arial, sans-serif; font-size: 11px; font-weight: 700; color: #000; line-height: 1; }
+.bga-logo .bga-green { color: #007a33; }
+.affiliate-disclosure {
+  font-family: 'DM Mono', monospace; font-size: 10px;
+  color: rgba(245,240,232,0.35); text-align: center;
+  padding: 6px 20px; line-height: 1.6; margin-top: 4px;
+}
+.footer-links { display: flex; flex-wrap: wrap; justify-content: center; gap: 6px 18px; margin-bottom: 14px; }
+.footer-links a { font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(245,240,232,0.4); text-decoration: none; transition: color 0.2s; }
+.footer-links a:hover { color: var(--gold); }
+.cookie-banner {
+  position: fixed; bottom: 0; left: 0; right: 0; z-index: 10001;
+  background: #0a1a0a; border-top: 1px solid rgba(201,168,76,0.25);
+  padding: 14px 20px; display: flex; align-items: center; gap: 14px;
+  flex-wrap: wrap; justify-content: space-between;
+  box-shadow: 0 -4px 24px rgba(0,0,0,0.5);
+}
+.cookie-banner p { font-family: 'DM Mono', monospace; font-size: 11px; color: rgba(245,240,232,0.65); line-height: 1.5; flex: 1; min-width: 200px; margin: 0; }
+.cookie-banner p a { color: var(--gold); text-decoration: none; }
+.cookie-accept {
+  font-family: 'DM Mono', monospace; font-size: 11px; letter-spacing: 0.1em;
+  text-transform: uppercase; padding: 9px 20px; background: var(--gold);
+  color: #000; border: none; border-radius: 6px; cursor: pointer;
+  font-weight: 700; flex-shrink: 0; white-space: nowrap;
+}
+.rg-strip {
+  background: #040a04; border-top: 1px solid rgba(201,168,76,0.1);
+  padding: 10px 20px; display: flex; align-items: center; justify-content: center;
+  gap: 16px; flex-wrap: wrap;
+}
+.rg-strip-text { font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase; color: rgba(245,240,232,0.3); }
+.gamstop-link { font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(245,240,232,0.3); text-decoration: none; border-bottom: 1px dotted rgba(245,240,232,0.2); }
+.gamstop-link:hover { color: var(--gold); }
+@media (max-width: 600px) {
+  .cookie-banner { flex-direction: column; align-items: flex-start; }
+  .rg-strip { gap: 10px; }
+}
 </style>
 </head>
 <body>
@@ -724,9 +778,10 @@ header::after {
       <div class="stat-value" id="current-bet">$10</div>
     </div>
     <div class="stat-divider"></div>
-    <a href="https://tracker.bettomaffiliates.com/link?btag=105781064_496598" target="_blank" rel="noopener noreferrer" class="skybet-btn">
+    <a href="https://tracker.bettomaffiliates.com/link?btag=105781064_496598" target="_blank" rel="noopener noreferrer sponsored" class="skybet-btn">
       Play for Real Stakes
     </a>
+    <span class="age-badge" title="18+ only">18+</span>
   </div>
 </header>
 
@@ -777,6 +832,17 @@ header::after {
         Prove your nerve. Master your strategy.
       </div>
       <button class="start-btn" onclick="startGame()">Deal Me In</button>
+      <div style="margin-top:18px;display:flex;flex-direction:column;align-items:center;gap:8px;">
+        <a href="https://tracker.bettomaffiliates.com/link?btag=105781064_496598" target="_blank" rel="noopener noreferrer sponsored" class="skybet-btn" style="font-size:13px;">
+          ▶ Play for Real Money Stakes
+        </a>
+        <div style="font-family:'DM Mono',monospace;font-size:9px;color:rgba(245,240,232,0.3);text-align:center;line-height:1.6;max-width:280px;">
+          18+ only &nbsp;·&nbsp; Sponsored link — we may earn a commission<br>
+          <a href="https://www.begambleaware.org" target="_blank" rel="noopener noreferrer" style="color:rgba(245,240,232,0.35);text-decoration:none;">begambleaware.org</a>
+          &nbsp;·&nbsp;
+          <a href="https://www.gamstop.co.uk" target="_blank" rel="noopener noreferrer" style="color:rgba(245,240,232,0.35);text-decoration:none;">gamstop.co.uk</a>
+        </div>
+      </div>
     </div>
 
     <!-- GAME AREA -->
@@ -986,16 +1052,61 @@ header::after {
   </div>
 </section>
 
-<footer style="position:relative;z-index:1;background:#020702;border-top:1px solid rgba(201,168,76,0.08);padding:28px 24px;text-align:center;">
+<footer style="position:relative;z-index:1;background:#020702;border-top:1px solid rgba(201,168,76,0.08);padding:28px 24px 16px;text-align:center;">
+
+  <!-- Responsible gambling logos -->
+  <div style="display:flex;align-items:center;justify-content:center;gap:20px;flex-wrap:wrap;margin-bottom:18px;">
+    <span class="age-badge" style="width:36px;height:36px;font-size:12px;">18+</span>
+    <a href="https://www.begambleaware.org" target="_blank" rel="noopener noreferrer" class="bga-logo" title="BeGambleAware">
+      <span class="bga-green">Be</span><span>Gamble</span><span class="bga-green">Aware</span><span>.org</span>
+    </a>
+    <a href="https://www.gamstop.co.uk" target="_blank" rel="noopener noreferrer" class="gamstop-link">GamStop</a>
+    <a href="https://www.gamcare.org.uk" target="_blank" rel="noopener noreferrer" class="gamstop-link">GamCare</a>
+  </div>
+
+  <!-- Footer nav links -->
+  <div class="footer-links">
+    <a href="/privacy-policy">Privacy Policy</a>
+    <a href="/terms">Terms &amp; Conditions</a>
+    <a href="/responsible-gambling">Responsible Gambling</a>
+    <a href="/cookies">Cookie Policy</a>
+    <a href="/about">About</a>
+    <a href="mailto:contact@blitzblackjack.com">Contact</a>
+  </div>
+
+  <!-- Brand line -->
   <div style="font-family:'DM Mono',monospace;font-size:10px;letter-spacing:0.2em;text-transform:uppercase;color:rgba(245,240,232,0.25);margin-bottom:10px;">
     Blitz Blackjack &nbsp;·&nbsp; Free Online Blackjack &nbsp;·&nbsp; No Download Required
   </div>
-  <div style="font-family:'DM Mono',monospace;font-size:10px;color:rgba(245,240,232,0.18);">
-    For entertainment only. No real money. No gambling. Play responsibly.
-    <br>
-    <a href="mailto:contact@blitzblackjack.com">contact@blitzblackjack.com</a>
+
+  <!-- Affiliate disclosure -->
+  <div class="affiliate-disclosure">
+    ⚠ Affiliate Disclosure: This site contains sponsored links. If you sign up to a casino via our links, we may earn a commission at no extra cost to you. This does not affect the game or your experience.
+  </div>
+
+  <!-- Entertainment disclaimer -->
+  <div style="font-family:'DM Mono',monospace;font-size:10px;color:rgba(245,240,232,0.18);margin-top:10px;line-height:1.7;">
+    For entertainment only. No real money. No gambling. All chip values are virtual.<br>
+    &copy; 2025 Blitz Blackjack. All rights reserved.
   </div>
 </footer>
+
+<!-- Responsible gambling strip -->
+<div class="rg-strip">
+  <span class="rg-strip-text">🔞 Must be 18+ to gamble</span>
+  <span class="rg-strip-text">·</span>
+  <span class="rg-strip-text">Gambling can be addictive — please play responsibly</span>
+  <span class="rg-strip-text">·</span>
+  <a href="https://www.begambleaware.org" target="_blank" rel="noopener noreferrer" class="gamstop-link">begambleaware.org</a>
+  <span class="rg-strip-text">·</span>
+  <a href="https://www.gamstop.co.uk" target="_blank" rel="noopener noreferrer" class="gamstop-link">Self-exclude: gamstop.co.uk</a>
+</div>
+
+<!-- Cookie consent banner -->
+<div class="cookie-banner" id="cookie-banner">
+  <p>We use cookies to improve your experience. By continuing to use this site you accept our <a href="/cookies">Cookie Policy</a> and <a href="/privacy-policy">Privacy Policy</a>.</p>
+  <button class="cookie-accept" onclick="acceptCookies()">Accept &amp; Continue</button>
+</div>
 
 <script>
 // ═══════════════════════════════════════════════════
@@ -1906,7 +2017,19 @@ window.onload = () => {
     updateUI();
   });
   updateUI();
+  // Cookie banner
+  if (localStorage.getItem('cookiesAccepted')) {
+    document.getElementById('cookie-banner').style.display = 'none';
+  }
 };
+
+function acceptCookies() {
+  localStorage.setItem('cookiesAccepted', '1');
+  const banner = document.getElementById('cookie-banner');
+  banner.style.opacity = '0';
+  banner.style.transition = 'opacity 0.4s';
+  setTimeout(() => banner.style.display = 'none', 400);
+}
 </script>
 </body>
 </html>
