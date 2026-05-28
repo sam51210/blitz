@@ -902,21 +902,41 @@ header::after {
 
 <!-- End-game modal -->
 <div id="end-modal" style="display:none; position:fixed; inset:0; z-index:300; align-items:center; justify-content:center; background:rgba(2,7,2,0.88);">
-  <div style="background:linear-gradient(180deg,#0d1f0d,#060e06); border:1px solid rgba(201,168,76,0.35); border-radius:18px; padding:44px 48px; max-width:400px; width:90%; text-align:center; box-shadow:0 24px 80px rgba(0,0,0,0.8), 0 0 0 1px rgba(201,168,76,0.08);">
-    <div style="font-size:32px; letter-spacing:6px; margin-bottom:20px; color:var(--gold);">♠ ♥ ♦ ♣</div>
-    <div style="font-family:'DM Mono',monospace; font-size:10px; letter-spacing:0.3em; text-transform:uppercase; color:var(--text-muted); margin-bottom:6px;">Final Balance</div>
-    <div id="modal-balance" style="font-size:52px; font-weight:700; color:var(--gold-light); margin-bottom:24px; letter-spacing:0.04em;"></div>
-    <div style="display:flex; gap:16px; margin-bottom:28px;">
-      <div style="flex:1; background:rgba(201,168,76,0.06); border:1px solid rgba(201,168,76,0.12); border-radius:10px; padding:14px 10px;">
-        <div style="font-family:'DM Mono',monospace; font-size:9px; letter-spacing:0.2em; text-transform:uppercase; color:var(--text-muted); margin-bottom:6px;">Best</div>
+  <div style="background:linear-gradient(180deg,#0d1f0d,#060e06); border:1px solid rgba(201,168,76,0.35); border-radius:18px; padding:32px 36px; max-width:440px; width:90%; text-align:center; box-shadow:0 24px 80px rgba(0,0,0,0.8), 0 0 0 1px rgba(201,168,76,0.08);">
+    <div style="font-size:28px; letter-spacing:6px; margin-bottom:12px; color:var(--gold);">♠ ♥ ♦ ♣</div>
+    <div style="font-family:'DM Mono',monospace; font-size:10px; letter-spacing:0.3em; text-transform:uppercase; color:var(--text-muted); margin-bottom:4px;">Final Balance</div>
+    <div id="modal-balance" style="font-size:52px; font-weight:700; color:var(--gold-light); margin-bottom:18px; letter-spacing:0.04em;"></div>
+
+    <!-- Row 1: Best Balance + Hands Played -->
+    <div style="display:flex; gap:10px; margin-bottom:10px;">
+      <div style="flex:1; background:rgba(201,168,76,0.06); border:1px solid rgba(201,168,76,0.12); border-radius:10px; padding:12px 8px;">
+        <div style="font-family:'DM Mono',monospace; font-size:9px; letter-spacing:0.2em; text-transform:uppercase; color:var(--text-muted); margin-bottom:5px;">Best Balance</div>
         <div id="modal-best" style="font-size:20px; font-weight:600; color:var(--gold-light);"></div>
       </div>
-      <div style="flex:1; background:rgba(201,168,76,0.06); border:1px solid rgba(201,168,76,0.12); border-radius:10px; padding:14px 10px;">
-        <div style="font-family:'DM Mono',monospace; font-size:9px; letter-spacing:0.2em; text-transform:uppercase; color:var(--text-muted); margin-bottom:6px;">Played</div>
+      <div style="flex:1; background:rgba(201,168,76,0.06); border:1px solid rgba(201,168,76,0.12); border-radius:10px; padding:12px 8px;">
+        <div style="font-family:'DM Mono',monospace; font-size:9px; letter-spacing:0.2em; text-transform:uppercase; color:var(--text-muted); margin-bottom:5px;">Hands Played</div>
         <div id="modal-games" style="font-size:20px; font-weight:600; color:var(--cream);"></div>
       </div>
     </div>
-    <button onclick="playAgain()" style="width:100%; font-family:'Cormorant Garamond',serif; font-size:18px; font-weight:700; letter-spacing:0.15em; text-transform:uppercase; padding:14px; background:linear-gradient(180deg,#2a6e3a,#163c20); color:#c0f0c8; border:1px solid #4a9e5e; border-radius:8px; cursor:pointer;">Play Again</button>
+
+    <!-- Row 2: Hands Won + Hands Lost -->
+    <div style="display:flex; gap:10px; margin-bottom:20px;">
+      <div style="flex:1; background:rgba(128,224,144,0.06); border:1px solid rgba(128,224,144,0.15); border-radius:10px; padding:12px 8px;">
+        <div style="font-family:'DM Mono',monospace; font-size:9px; letter-spacing:0.2em; text-transform:uppercase; color:var(--text-muted); margin-bottom:5px;">Hands Won</div>
+        <div id="modal-wins" style="font-size:20px; font-weight:600; color:#80e090;"></div>
+      </div>
+      <div style="flex:1; background:rgba(224,82,82,0.06); border:1px solid rgba(224,82,82,0.15); border-radius:10px; padding:12px 8px;">
+        <div style="font-family:'DM Mono',monospace; font-size:9px; letter-spacing:0.2em; text-transform:uppercase; color:var(--text-muted); margin-bottom:5px;">Hands Lost</div>
+        <div id="modal-losses" style="font-size:20px; font-weight:600; color:#e05252;"></div>
+      </div>
+    </div>
+
+    <!-- Buttons: Share + Play Again -->
+    <div style="display:flex; gap:10px;">
+      <button onclick="shareResult()" style="flex:1; font-family:'Cormorant Garamond',serif; font-size:16px; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; padding:13px 10px; background:rgba(201,168,76,0.08); color:var(--gold-light); border:1px solid rgba(201,168,76,0.35); border-radius:8px; cursor:pointer; transition:all 0.2s;">↗ Share</button>
+      <button onclick="playAgain()" style="flex:2; font-family:'Cormorant Garamond',serif; font-size:18px; font-weight:700; letter-spacing:0.15em; text-transform:uppercase; padding:13px; background:linear-gradient(180deg,#2a6e3a,#163c20); color:#c0f0c8; border:1px solid #4a9e5e; border-radius:8px; cursor:pointer;">Play Again</button>
+    </div>
+    <div id="share-feedback" style="font-family:'DM Mono',monospace; font-size:10px; letter-spacing:0.15em; color:var(--gold); margin-top:10px; min-height:16px; opacity:0; transition:opacity 0.3s;"></div>
   </div>
 </div>
 
@@ -1573,6 +1593,21 @@ function calculateHandValue(hand) {
   return value;
 }
 
+function getHandDisplayScore(hand) {
+  let value = 0, aces = 0;
+  for (const card of hand) { value += card.numeric; if (card.value === 'A') aces++; }
+  const hardTotal = value > 21 ? value - (Math.floor((value - 21 + 9) / 10) * 10) : value;
+  // recalculate soft total
+  let soft = 0, aceCount = 0;
+  for (const card of hand) { soft += card.numeric; if (card.value === 'A') aceCount++; }
+  while (soft > 21 && aceCount > 0) { soft -= 10; aceCount--; }
+  // if there's still a usable ace that gives two distinct values
+  if (aceCount > 0 && soft <= 21 && soft - 10 >= 1 && soft !== soft - 10) {
+    return (soft - 10) + '/' + soft;
+  }
+  return String(soft);
+}
+
 function isBlackjack(hand) {
   return hand.length === 2 && calculateHandValue(hand) === 21;
 }
@@ -1607,7 +1642,7 @@ function renderHands(hideDealer = true) {
     if (playerHands.length > 1) {
       const lbl = document.createElement('div');
       lbl.className = 'hand-label';
-      lbl.textContent = `Hand ${index + 1}  ·  ${calculateHandValue(hand)}`;
+      lbl.textContent = `Hand ${index + 1}  ·  ${getHandDisplayScore(hand)}`;
       wrapper.appendChild(lbl);
     }
     const cards = document.createElement('div');
@@ -1619,7 +1654,7 @@ function renderHands(hideDealer = true) {
       scoreEl.style.marginTop = '4px';
       const badge = document.createElement('span');
       badge.className = 'score-badge';
-      badge.textContent = calculateHandValue(hand);
+      badge.textContent = getHandDisplayScore(hand);
       scoreEl.appendChild(badge);
       wrapper.appendChild(cards);
       wrapper.appendChild(scoreEl);
@@ -1717,22 +1752,31 @@ function deal() {
   const DELAY = 600;
 
   dealCardAnimated(p1, playerCards, false, DELAY * 0, () => {
-    playerBadge.textContent = calculateHandValue(playerHands[0]);
+    playerBadge.textContent = getHandDisplayScore(playerHands[0]);
   });
   dealCardAnimated(d1, dealerEl, false, DELAY * 1, () => {
     scoreBadge.style.display = 'inline-block';
     scoreBadge.textContent = d1.numeric;
   });
   dealCardAnimated(p2, playerCards, false, DELAY * 2, () => {
-    playerBadge.textContent = calculateHandValue(playerHands[0]);
+    playerBadge.textContent = getHandDisplayScore(playerHands[0]);
   });
   dealCardAnimated(d2, dealerEl, true, DELAY * 3, () => {
     document.getElementById('hit-btn').disabled = false;
     document.getElementById('stand-btn').disabled = false;
     document.getElementById('double-btn').disabled = false;
     checkSplitAvailability();
-    showHint(); // ← show hint after deal
-    if (isBlackjack(playerHands[0])) setTimeout(() => stand(), 700);
+    showHint();
+    // Fix 2: check dealer blackjack before player acts
+    if (isBlackjack(dealerHand)) {
+      document.getElementById('hit-btn').disabled = true;
+      document.getElementById('stand-btn').disabled = true;
+      document.getElementById('double-btn').disabled = true;
+      document.getElementById('split-btn').disabled = true;
+      setTimeout(endHand, 700);
+    } else if (isBlackjack(playerHands[0])) {
+      setTimeout(() => stand(), 700);
+    }
   });
 }
 
@@ -1749,8 +1793,8 @@ function hit() {
   targetCards.appendChild(renderCard(card, false));
 
   const badges = document.getElementById('player-hand').querySelectorAll('.score-badge');
-  if (badges[currentHandIndex]) badges[currentHandIndex].textContent = calculateHandValue(hand);
-  else if (badges[0]) badges[0].textContent = calculateHandValue(hand);
+  if (badges[currentHandIndex]) badges[currentHandIndex].textContent = getHandDisplayScore(hand);
+  else if (badges[0]) badges[0].textContent = getHandDisplayScore(hand);
 
   document.getElementById('double-btn').disabled = true;
   document.getElementById('split-btn').disabled = true;
@@ -1847,15 +1891,21 @@ function splitHand() {
 function endHand() {
   gameActive = false;
   clearHint();
-  renderHands(false);
+  renderHands(false); // always reveal dealer hole card
   const dealerValue = calculateHandValue(dealerHand);
+  const dealerBJ = isBlackjack(dealerHand);
   let totalWinnings = 0;
   let results = [];
 
   playerHands.forEach((hand, index) => {
     const playerValue = calculateHandValue(hand);
     let winnings = 0;
-    if (playerValue > 21) {
+    if (dealerBJ && isBlackjack(hand)) {
+      winnings = activeBet; // both BJ = push
+      results.push(`HAND ${index+1}: PUSH`);
+    } else if (dealerBJ) {
+      results.push(`HAND ${index+1}: LOSE`); // dealer BJ beats everything else
+    } else if (playerValue > 21) {
       results.push(`HAND ${index+1}: BUST`);
     } else if (dealerValue > 21 || playerValue > dealerValue) {
       if (isBlackjack(hand)) {
@@ -1939,8 +1989,60 @@ function endGame(busted = false) {
 function showEndModal() {
   document.getElementById('modal-balance').textContent = '$' + balance;
   document.getElementById('modal-best').textContent = '$' + sessionBest;
-  document.getElementById('modal-games').textContent = sessionGames + ' hand' + (sessionGames !== 1 ? 's' : '');
+  document.getElementById('modal-games').textContent = sessionGames;
+  document.getElementById('modal-wins').textContent = sessionWins;
+  document.getElementById('modal-losses').textContent = sessionLosses;
   document.getElementById('end-modal').style.display = 'flex';
+}
+
+function shareResult() {
+  const winRate = sessionGames > 0 ? Math.round((sessionWins / sessionGames) * 100) : 0;
+  const profit = balance - 100;
+  const profitStr = profit >= 0 ? '+$' + profit : '-$' + Math.abs(profit);
+  const text =
+    '♠ Blitz Blackjack — 3 Min Challenge\n' +
+    '💰 Final Balance: $' + balance + ' (' + profitStr + ')\n' +
+    '🏆 Best Balance: $' + sessionBest + '\n' +
+    '🃏 ' + sessionGames + ' hands played · ' + sessionWins + ' won · ' + sessionLosses + ' lost · ' + winRate + '% win rate\n' +
+    '🎮 Play free at blitzblackjack.com';
+
+  const feedback = document.getElementById('share-feedback');
+  function showFeedback(msg) {
+    feedback.textContent = msg;
+    feedback.style.opacity = '1';
+    setTimeout(() => { feedback.style.opacity = '0'; }, 2500);
+  }
+
+  if (navigator.share) {
+    navigator.share({ title: 'Blitz Blackjack', text: text }).catch(() => copyToClipboard());
+  } else {
+    copyToClipboard();
+  }
+
+  function copyToClipboard() {
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(text)
+        .then(() => showFeedback('✓ Result copied to clipboard'))
+        .catch(() => fallbackCopy());
+    } else {
+      fallbackCopy();
+    }
+  }
+
+  function fallbackCopy() {
+    const ta = document.createElement('textarea');
+    ta.value = text;
+    ta.style.cssText = 'position:fixed;top:-9999px;left:-9999px;opacity:0;';
+    document.body.appendChild(ta);
+    ta.focus(); ta.select();
+    try {
+      document.execCommand('copy');
+      showFeedback('✓ Result copied to clipboard');
+    } catch(e) {
+      showFeedback('Could not copy — try manually');
+    }
+    document.body.removeChild(ta);
+  }
 }
 
 function playAgain() {
