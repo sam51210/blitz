@@ -1696,6 +1696,7 @@ function deal() {
   if (gameActive) return;
   if (selectedBet > balance) { showMessage('Insufficient balance', '#e05252'); return; }
   if (deck.length < 52) createDeck();
+  if (!timerInterval) startTimer(); // start timer on first deal only
   activeBet = selectedBet;
   balance -= activeBet;
   updateUI();
@@ -2002,7 +2003,6 @@ function startGame() {
   document.getElementById('game-area').style.display = 'flex';
   updateUI();
   createDeck();
-  startTimer();
 }
 
 window.onload = () => {
