@@ -137,7 +137,7 @@ header::after {
 .stat { text-align: center; }
 .stat-label { font-family: 'DM Mono', monospace; font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 3px; }
 .stat-value { font-size: 22px; font-weight: 600; color: var(--gold-light); letter-spacing: 0.04em; }
-#timer { color: #e05252; font-family: 'DM Mono', monospace; font-size: 20px; }
+#timer { font-family: 'DM Mono', monospace; font-size: 22px; font-weight: 600; color: var(--cream); transition: color 0.3s; }
 .stat-divider { width: 1px; height: 36px; background: linear-gradient(180deg, transparent, var(--gold-dim), transparent); }
 
 .main-container { display: flex; height: calc(100dvh - 56px); position: relative; z-index: 1; overflow: hidden; }
@@ -571,7 +571,23 @@ header::after {
 ═══════════════════════════════════════ */
 @media (max-width: 860px) {
   .main-container { flex-direction: column; }
-  .leaderboard-sidebar { display: none; }
+  .leaderboard-sidebar {
+    width: 100%;
+    border-right: none;
+    border-bottom: 1px solid rgba(201,168,76,0.15);
+    padding: 8px 16px;
+    display: flex !important;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 0;
+    justify-content: space-around;
+    align-items: center;
+    overflow: hidden;
+  }
+  .lb-title { display: none; }
+  .leaderboard-sidebar > div { flex: 1; min-width: 60px; text-align: center; padding: 4px 6px; border-top: none !important; margin: 0 !important; }
+  .leaderboard-sidebar > div > div:first-child { font-size: 8px !important; margin-bottom: 2px !important; }
+  .leaderboard-sidebar > div > div:last-child { font-size: 14px !important; }
   .table-surface { border-radius: 40px; }
   .start-title { font-size: 42px; }
   .controls-top-row { flex-direction: row; align-items: center; gap: 14px; }
@@ -606,7 +622,7 @@ header::after {
 
   /* LAYOUT */
   .main-container { flex-direction: column; }
-  .leaderboard-sidebar { display: none; }
+  .leaderboard-sidebar { display: flex !important; }
   .game-container { padding: 8px 8px 6px; }
 
   /* TABLE */
@@ -743,21 +759,6 @@ header::after {
 <header>
   <div class="logo">Blitz<span>♠</span>BlackJack</div>
   <div class="stats">
-    <div class="stat">
-      <div class="stat-label">Balance</div>
-      <div class="stat-value" id="balance">$100</div>
-    </div>
-    <div class="stat-divider"></div>
-    <div class="stat">
-      <div class="stat-label">Time Left</div>
-      <div class="stat-value"><span id="timer">3:00</span></div>
-    </div>
-    <div class="stat-divider"></div>
-    <div class="stat">
-      <div class="stat-label">Bet</div>
-      <div class="stat-value" id="current-bet">$10</div>
-    </div>
-    <div class="stat-divider"></div>
     <a href="https://betway.com/bwp/goldblitzextreme/en-gb/?s=sp52723" target="_blank" rel="noopener noreferrer sponsored" class="skybet-btn">
       Play for Real Stakes
     </a>
@@ -794,6 +795,27 @@ header::after {
     <div style="text-align:center;">
       <div style="font-family:'DM Mono',monospace; font-size:9px; letter-spacing:0.25em; text-transform:uppercase; color:var(--text-muted); margin-bottom:6px;">Hands Lost</div>
       <div id="session-losses" style="font-size:22px; font-weight:600; color:#e05252;">0</div>
+    </div>
+
+    <div style="border-top:1px solid rgba(201,168,76,0.1); margin: 10px 0;"></div>
+
+    <div style="text-align:center;">
+      <div style="font-family:'DM Mono',monospace; font-size:9px; letter-spacing:0.25em; text-transform:uppercase; color:var(--text-muted); margin-bottom:6px;">Balance</div>
+      <div id="balance" style="font-size:22px; font-weight:600; color:var(--gold-light);">$100</div>
+    </div>
+
+    <div style="border-top:1px solid rgba(201,168,76,0.1); margin: 10px 0;"></div>
+
+    <div style="text-align:center;">
+      <div style="font-family:'DM Mono',monospace; font-size:9px; letter-spacing:0.25em; text-transform:uppercase; color:var(--text-muted); margin-bottom:6px;">Current Bet</div>
+      <div id="current-bet" style="font-size:22px; font-weight:600; color:var(--cream);">$10</div>
+    </div>
+
+    <div style="border-top:1px solid rgba(201,168,76,0.1); margin: 10px 0;"></div>
+
+    <div style="text-align:center;">
+      <div style="font-family:'DM Mono',monospace; font-size:9px; letter-spacing:0.25em; text-transform:uppercase; color:var(--text-muted); margin-bottom:6px;">Time Left</div>
+      <div style="font-size:22px; font-weight:600; color:var(--cream);"><span id="timer">3:00</span></div>
     </div>
 
   </div>
