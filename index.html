@@ -570,136 +570,194 @@ header::after {
    TABLET  (≤860px)
 ═══════════════════════════════════════ */
 @media (max-width: 860px) {
-  .main-container { flex-direction: column; }
+  .main-container { flex-direction: column; height: calc(100dvh - 44px); }
+  header { height: 44px; padding: 0 16px; }
+  .logo { font-size: 20px; }
+  .skybet-btn { font-size: 12px; padding: 7px 12px; letter-spacing: 0.06em; }
+  .age-badge { width: 24px; height: 24px; font-size: 9px; }
+
+  /* Stats strip — horizontal bar */
   .leaderboard-sidebar {
     width: 100%;
+    height: auto;
+    flex-shrink: 0;
     border-right: none;
     border-bottom: 1px solid rgba(201,168,76,0.15);
-    padding: 8px 16px;
+    padding: 5px 10px;
     display: flex !important;
     flex-direction: row;
-    flex-wrap: wrap;
-    gap: 0;
+    flex-wrap: nowrap;
     justify-content: space-around;
     align-items: center;
     overflow: hidden;
+    gap: 0;
   }
   .lb-title { display: none; }
-  .leaderboard-sidebar > div { flex: 1; min-width: 60px; text-align: center; padding: 4px 6px; border-top: none !important; margin: 0 !important; }
-  .leaderboard-sidebar > div > div:first-child { font-size: 8px !important; margin-bottom: 2px !important; }
-  .leaderboard-sidebar > div > div:last-child { font-size: 14px !important; }
-  .table-surface { border-radius: 40px; }
-  .start-title { font-size: 42px; }
+  .leaderboard-sidebar > div {
+    flex: 1;
+    min-width: 0;
+    text-align: center;
+    padding: 3px 4px;
+    border-top: none !important;
+    margin: 0 !important;
+  }
+  /* hide the <hr> dividers inside sidebar */
+  .leaderboard-sidebar > div[style*="border-top"] { display: none !important; }
+  .leaderboard-sidebar > div > div:first-child { font-size: 7px !important; letter-spacing: 0.12em !important; margin-bottom: 1px !important; }
+  .leaderboard-sidebar > div > div:last-child, .leaderboard-sidebar > div > div > span { font-size: 13px !important; }
+
+  .game-container { padding: 8px 12px 8px; }
+  .table-surface { border-radius: 40px; padding: 14px 28px 12px; margin-bottom: 8px; }
   .controls-top-row { flex-direction: row; align-items: center; gap: 14px; }
   .bet-row { flex-wrap: wrap; gap: 8px; }
-  .skybet-btn { font-size: 12px; padding: 7px 12px; letter-spacing: 0.06em; }
   .stat-divider { display: none; }
   .stats { gap: 16px; }
 }
 
 /* ═══════════════════════════════════════
-   MOBILE  (≤600px)
+   MOBILE PORTRAIT  (≤600px)
 ═══════════════════════════════════════ */
 @media (max-width: 600px) {
 
-  /* HEADER */
+  /* HEADER — single slim bar */
   header {
-    height: auto;
-    flex-direction: column;
-    align-items: stretch;
-    padding: 8px 12px 6px;
-    gap: 6px;
+    height: 40px;
+    padding: 0 12px;
+    flex-direction: row;
+    align-items: center;
+    gap: 8px;
   }
-  .logo { font-size: 18px; text-align: center; }
-  .stats { gap: 0; justify-content: space-between; width: 100%; flex-wrap: wrap; }
-  .stat { flex: 1; min-width: 0; text-align: center; }
-  .stat-label { font-size: 7px; letter-spacing: 0.12em; }
-  .stat-value { font-size: 15px; }
-  #timer { font-size: 14px; }
-  .stat-divider { display: none; }
+  .logo { font-size: 16px; letter-spacing: 0.06em; white-space: nowrap; }
   .age-badge { display: none; }
-  .skybet-btn { width: 100%; justify-content: center; font-size: 12px; padding: 8px 12px; margin-top: 2px; }
+  .skybet-btn { font-size: 11px; padding: 6px 10px; letter-spacing: 0.05em; white-space: nowrap; }
 
-  /* LAYOUT */
-  .main-container { flex-direction: column; }
-  .leaderboard-sidebar { display: flex !important; }
-  .game-container { padding: 8px 8px 6px; }
+  /* MAIN */
+  .main-container { flex-direction: column; height: calc(100dvh - 40px); }
+  .game-container { padding: 5px 6px 5px; }
 
-  /* TABLE */
-  .table-surface { border-radius: 24px; padding: 10px 14px 8px; border-width: 2px; margin-bottom: 7px;
-    box-shadow: inset 0 0 30px rgba(0,0,0,0.5), 0 0 0 3px #06100a, 0 0 0 5px var(--gold-dim), 0 6px 20px rgba(0,0,0,0.6); }
+  /* STATS STRIP — 7 items in one slim row */
+  .leaderboard-sidebar {
+    display: flex !important;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    width: 100%;
+    height: auto;
+    flex-shrink: 0;
+    border-right: none;
+    border-bottom: 1px solid rgba(201,168,76,0.12);
+    padding: 4px 6px;
+    justify-content: space-around;
+    align-items: center;
+    overflow: hidden;
+    gap: 0;
+    background: rgba(4,10,4,0.9);
+  }
+  .lb-title { display: none; }
+  .leaderboard-sidebar > div {
+    flex: 1;
+    min-width: 0;
+    text-align: center;
+    padding: 0 2px;
+    border-top: none !important;
+    margin: 0 !important;
+  }
+  /* hide hr dividers */
+  .leaderboard-sidebar > div[style*="border-top"] { display: none !important; }
+  .leaderboard-sidebar > div > div:first-child { font-size: 6px !important; letter-spacing: 0.08em !important; margin-bottom: 1px !important; color: rgba(245,240,232,0.35) !important; }
+  .leaderboard-sidebar > div > div:last-child,
+  .leaderboard-sidebar > div > div > span#timer { font-size: 11px !important; font-weight: 600; }
+
+  /* TABLE — very tight */
+  .table-surface {
+    border-radius: 20px;
+    padding: 8px 12px 6px;
+    border-width: 2px;
+    margin-bottom: 5px;
+    box-shadow: inset 0 0 20px rgba(0,0,0,0.5), 0 0 0 2px #06100a, 0 0 0 4px var(--gold-dim), 0 4px 14px rgba(0,0,0,0.6);
+  }
+  .table-surface::before { border-radius: 18px; }
 
   /* CARDS */
-  .card { width: 58px; height: 82px; border-radius: 6px; }
-  .card .corner .rank { font-size: 13px; }
-  .card .corner .suit-small { font-size: 9px; }
-  .card .suit-center { font-size: 28px; }
-  .card .corner-tl { top: 4px; left: 5px; }
-  .card .corner-br { bottom: 4px; right: 5px; }
-  .hand { gap: 5px; min-height: 72px; margin: 1px 0 4px; }
+  .card { width: 50px; height: 70px; border-radius: 5px; }
+  .card .corner .rank { font-size: 11px; }
+  .card .corner .suit-small { font-size: 8px; }
+  .card .suit-center { font-size: 24px; }
+  .card .corner-tl { top: 3px; left: 4px; }
+  .card .corner-br { bottom: 3px; right: 4px; }
+  .hand { gap: 4px; min-height: 60px; margin: 1px 0 3px; }
 
   /* ZONE / SCORE */
-  .zone-label { font-size: 8px; letter-spacing: 0.18em; margin-bottom: 4px; }
-  .score-badge { font-size: 11px; padding: 2px 6px; }
+  .zone-label { font-size: 7px; letter-spacing: 0.14em; margin-bottom: 3px; }
+  .score-badge { font-size: 10px; padding: 1px 5px; }
 
   /* MESSAGE */
-  .message { font-size: 16px; }
-  .message-wrap { min-height: 26px; margin: 2px 0 4px; }
+  .message { font-size: 14px; }
+  .message-wrap { min-height: 22px; margin: 1px 0 3px; }
 
   /* HINT PANEL */
-  .hint-panel { margin: 0 0 6px; }
-  .hint-panel.visible { max-height: 80px; }
-  .hint-slab { width: 58px; min-width: 58px; padding: 8px 5px; }
-  .hint-slab-icon { font-size: 16px; }
-  .hint-slab-word { font-size: 7px; }
-  .hint-action { font-size: 14px; }
-  .hint-reason { font-size: 11px; line-height: 1.35; }
-  .hint-text-wrap { padding: 7px 10px; }
+  .hint-panel { margin: 0 0 4px; }
+  .hint-panel.visible { max-height: 64px; }
+  .hint-slab { width: 50px; min-width: 50px; padding: 6px 4px; }
+  .hint-slab-icon { font-size: 14px; }
+  .hint-slab-word { font-size: 6px; }
+  .hint-action { font-size: 12px; margin-bottom: 2px; }
+  .hint-reason { font-size: 10px; line-height: 1.3; }
+  .hint-text-wrap { padding: 6px 8px; }
 
   /* CONTROLS */
-  .controls-panel { padding: 9px 10px; border-radius: 10px; }
-  .controls-top-row { flex-direction: row; align-items: center; justify-content: space-between; margin-bottom: 8px; gap: 6px; }
-  .hint-toggle-label { font-size: 8px; letter-spacing: 0.12em; }
-  .toggle-switch { width: 34px; height: 19px; }
-  .toggle-track { border-radius: 10px; }
-  .toggle-thumb { width: 12px; height: 12px; top: 3px; left: 2px; }
-  .toggle-switch input:checked + .toggle-track + .toggle-thumb { left: 18px; }
+  .controls-panel { padding: 7px 8px; border-radius: 10px; }
+  .controls-top-row { flex-direction: row; align-items: center; justify-content: space-between; margin-bottom: 6px; gap: 6px; }
+  .hint-toggle-wrap { display: flex; align-items: center; gap: 5px; }
+  .hint-toggle-label { font-size: 7px; letter-spacing: 0.1em; }
+  .toggle-switch { width: 30px; height: 17px; }
+  .toggle-track { border-radius: 9px; }
+  .toggle-thumb { width: 10px; height: 10px; top: 3px; left: 2px; }
+  .toggle-switch input:checked + .toggle-track + .toggle-thumb { left: 16px; }
 
   /* BET ROW */
-  .bet-row { gap: 6px; margin-bottom: 8px; justify-content: center; flex-wrap: wrap; }
-  .bet-label { font-size: 8px; margin-right: 6px; }
-  .bet-btn { width: 32px; height: 32px; font-size: 16px; }
-  #bet-input { width: 56px; height: 32px; font-size: 13px; }
-  .quick-bets { gap: 3px; margin-left: 6px; }
-  .quick-bet { padding: 4px 7px; font-size: 10px; }
+  .bet-row { gap: 4px; margin-bottom: 6px; justify-content: center; flex-wrap: nowrap; }
+  .bet-label { font-size: 7px; margin-right: 4px; }
+  .bet-btn { width: 28px; height: 28px; font-size: 14px; }
+  #bet-input { width: 48px; height: 28px; font-size: 12px; }
+  .quick-bets { gap: 3px; margin-left: 4px; }
+  .quick-bet { padding: 3px 6px; font-size: 9px; }
 
-  /* ACTION BUTTONS — 2-col grid */
-  .actions { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
-  .action-btn { font-size: 14px; padding: 11px 8px; letter-spacing: 0.06em; border-radius: 8px; }
-  .btn-deal { grid-column: 1 / -1; font-size: 16px; padding: 12px 8px; }
+  /* ACTION BUTTONS — 2-col grid, deal full width */
+  .actions { display: grid; grid-template-columns: 1fr 1fr; gap: 5px; }
+  .action-btn { font-size: 13px; padding: 9px 6px; letter-spacing: 0.04em; border-radius: 7px; }
+  .btn-deal { grid-column: 1 / -1; font-size: 15px; padding: 10px 6px; }
 
   /* START SCREEN */
-  .start-screen { padding: 24px 16px 80px; }
-  .start-ornament { font-size: 32px; margin-bottom: 14px; }
-  .start-title { font-size: 30px; letter-spacing: 0.08em; }
-  .start-subtitle { font-size: 8px; letter-spacing: 0.22em; margin-bottom: 20px; }
-  .start-divider { width: 200px; margin-bottom: 18px; }
-  .start-body { font-size: 14px; line-height: 1.65; margin-bottom: 24px; padding: 0 4px; }
-  .start-btn { font-size: 16px; padding: 13px 36px; letter-spacing: 0.12em; }
+  .start-screen { padding: 20px 14px 70px; }
+  .start-ornament { font-size: 28px; margin-bottom: 10px; }
+  .start-title { font-size: 26px; letter-spacing: 0.06em; }
+  .start-subtitle { font-size: 8px; letter-spacing: 0.18em; margin-bottom: 16px; }
+  .start-divider { width: 180px; margin-bottom: 14px; }
+  .start-body { font-size: 13px; line-height: 1.6; margin-bottom: 20px; padding: 0 4px; }
+  .start-btn { font-size: 15px; padding: 12px 32px; letter-spacing: 0.1em; }
 
   /* MUTE */
-  #mute-btn { bottom: 8px; right: 8px; font-size: 9px; padding: 6px 10px; }
+  #mute-btn { bottom: 6px; right: 6px; font-size: 8px; padding: 5px 8px; }
 
   /* SEO */
-  .seo-content { padding: 40px 14px 48px; }
-  .seo-heading { font-size: 22px; }
-  .seo-subheading { font-size: 16px; }
-  .seo-content p { font-size: 14px; }
+  .seo-content { padding: 32px 12px 40px; }
+  .seo-heading { font-size: 20px; }
+  .seo-subheading { font-size: 15px; }
+  .seo-content p { font-size: 13px; }
   .strategy-grid { grid-template-columns: 1fr; }
-  .seo-cta-btn { font-size: 15px; padding: 13px 28px; }
+  .seo-cta-btn { font-size: 14px; padding: 12px 24px; }
 
   /* HAND WRAPPER */
-  .hand-wrapper { padding: 6px 8px; }
+  .hand-wrapper { padding: 4px 6px; }
+
+  /* END MODAL */
+  #end-modal > div { padding: 22px 18px; }
+  #end-modal > div > div:first-child { font-size: 20px; margin-bottom: 8px; }
+
+  /* COOKIE BANNER */
+  .cookie-banner { padding: 10px 14px; gap: 8px; }
+  .cookie-banner p { font-size: 10px; }
+  .cookie-accept { font-size: 10px; padding: 7px 14px; }
 }
 
 /* ── COMPLIANCE STYLES ── */
@@ -1088,11 +1146,11 @@ header::after {
 
   <!-- Footer nav links -->
   <div class="footer-links">
-    <a href="/privacy-policy">Privacy Policy</a>
-    <a href="/terms">Terms &amp; Conditions</a>
-    <a href="/responsible-gambling">Responsible Gambling</a>
-    <a href="/cookies">Cookie Policy</a>
-    <a href="/about">About</a>
+    <a href="#" onclick="openModal('privacy');return false;">Privacy Policy</a>
+    <a href="#" onclick="openModal('terms');return false;">Terms &amp; Conditions</a>
+    <a href="#" onclick="openModal('rg');return false;">Responsible Gambling</a>
+    <a href="#" onclick="openCookiePolicy();return false;">Cookie Policy</a>
+    <a href="#" onclick="openModal('about');return false;">About</a>
     <a href="mailto:contact@blitzblackjack.com">Contact</a>
   </div>
 
@@ -1126,7 +1184,7 @@ header::after {
 
 <!-- Cookie consent banner -->
 <div class="cookie-banner" id="cookie-banner">
-  <p>We use cookies to improve your experience. By continuing to use this site you accept our <a href="/cookies">Cookie Policy</a> and <a href="/privacy-policy">Privacy Policy</a>.</p>
+  <p>We use cookies to improve your experience. By continuing to use this site you accept our <a href="#" onclick="openCookiePolicy();return false;">Cookie Policy</a> and <a href="#" onclick="openModal('privacy');return false;">Privacy Policy</a>.</p>
   <button class="cookie-accept" onclick="acceptCookies()">Accept &amp; Continue</button>
 </div>
 
@@ -2121,19 +2179,621 @@ window.onload = () => {
     updateUI();
   });
   updateUI();
-  // Cookie banner
-  if (localStorage.getItem('cookiesAccepted')) {
-    document.getElementById('cookie-banner').style.display = 'none';
-  }
+  // Cookie banner — hide if already accepted
+  try {
+    if (localStorage.getItem('cookiesAccepted')) {
+      const b = document.getElementById('cookie-banner');
+      if (b) b.style.display = 'none';
+    }
+  } catch(e) {}
 };
 
 function acceptCookies() {
-  localStorage.setItem('cookiesAccepted', '1');
+  try { localStorage.setItem('cookiesAccepted', '1'); } catch(e) {}
   const banner = document.getElementById('cookie-banner');
+  if (!banner) return;
+  banner.style.transition = 'opacity 0.35s ease';
   banner.style.opacity = '0';
-  banner.style.transition = 'opacity 0.4s';
-  setTimeout(() => banner.style.display = 'none', 400);
+  banner.style.pointerEvents = 'none';
+  setTimeout(function() { banner.style.display = 'none'; }, 380);
 }
 </script>
+<!-- ═══════════════════════════════════════════════════
+     COOKIE POLICY MODAL
+═══════════════════════════════════════════════════ -->
+<div id="cookie-policy-modal" style="display:none; position:fixed; inset:0; z-index:9000; background:rgba(2,7,2,0.92); overflow-y:auto; -webkit-overflow-scrolling:touch;">
+  <div style="max-width:760px; margin:0 auto; padding:32px 20px 60px; position:relative; z-index:1;">
+
+    <!-- Close bar -->
+    <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:32px;">
+      <div style="font-family:'Cormorant Garamond',serif; font-size:20px; font-weight:700; letter-spacing:0.12em; text-transform:uppercase; color:var(--gold-light);">Blitz<span style="color:var(--cream);opacity:0.5;margin:0 5px;font-weight:400;">♠</span>BlackJack</div>
+      <button onclick="closeCookiePolicy()" style="font-family:'DM Mono',monospace; font-size:11px; letter-spacing:0.18em; text-transform:uppercase; color:var(--gold); background:transparent; border:1px solid rgba(201,168,76,0.3); padding:8px 18px; border-radius:5px; cursor:pointer;">✕ Close</button>
+    </div>
+
+    <!-- Hero -->
+    <div style="text-align:center; margin-bottom:40px;">
+      <div style="font-size:24px; letter-spacing:8px; color:var(--gold); margin-bottom:16px; opacity:0.7;">♠ ♥ ♦ ♣</div>
+      <h2 style="font-family:'Cormorant Garamond',serif; font-size:46px; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; color:var(--gold-light); line-height:1; margin-bottom:12px;">Cookie Policy</h2>
+      <div style="font-family:'DM Mono',monospace; font-size:10px; letter-spacing:0.3em; text-transform:uppercase; color:var(--text-muted); margin-bottom:20px;">Blitz Blackjack · blitzblackjack.com</div>
+      <div style="width:120px; height:1px; background:linear-gradient(90deg,transparent,var(--gold),transparent); margin:0 auto 14px;"></div>
+      <div style="font-family:'DM Mono',monospace; font-size:10px; letter-spacing:0.15em; color:var(--text-muted);">Last updated: 1 June 2025</div>
+    </div>
+
+    <!-- Section 1 -->
+    <div class="cp-section">
+      <div class="cp-num">01</div>
+      <h3 class="cp-title">What Are Cookies?</h3>
+      <p class="cp-body">Cookies are small text files placed on your device when you visit a website. They are widely used to make websites work efficiently, to remember your preferences, and to provide information to website owners.</p>
+      <p class="cp-body">Cookies do not contain personally identifiable information and cannot run programs or deliver viruses to your computer. They are assigned uniquely to you and can only be read by a web server in the domain that issued the cookie.</p>
+    </div>
+
+    <!-- Section 2 -->
+    <div class="cp-section">
+      <div class="cp-num">02</div>
+      <h3 class="cp-title">How We Use Cookies</h3>
+      <p class="cp-body">Blitz Blackjack uses cookies to improve your experience. We use them to remember your preferences (such as whether you have accepted this notice), to understand how our site is used, and to support our affiliate partnerships.</p>
+      <p class="cp-body">We do not use cookies to collect personally identifiable information, and we do not sell your data to third parties.</p>
+    </div>
+
+    <!-- Section 3 — Cookie Table -->
+    <div class="cp-section">
+      <div class="cp-num">03</div>
+      <h3 class="cp-title">Types of Cookies We Use</h3>
+      <p class="cp-body" style="margin-bottom:16px;">The table below explains the cookies we use and why.</p>
+      <div style="overflow-x:auto; -webkit-overflow-scrolling:touch;">
+        <table style="width:100%; border-collapse:collapse; font-size:14px;">
+          <thead>
+            <tr>
+              <th style="font-family:'DM Mono',monospace; font-size:9px; letter-spacing:0.2em; text-transform:uppercase; color:var(--gold); padding:10px 14px; text-align:left; border-bottom:1px solid rgba(201,168,76,0.25);">Cookie</th>
+              <th style="font-family:'DM Mono',monospace; font-size:9px; letter-spacing:0.2em; text-transform:uppercase; color:var(--gold); padding:10px 14px; text-align:left; border-bottom:1px solid rgba(201,168,76,0.25);">Type</th>
+              <th style="font-family:'DM Mono',monospace; font-size:9px; letter-spacing:0.2em; text-transform:uppercase; color:var(--gold); padding:10px 14px; text-align:left; border-bottom:1px solid rgba(201,168,76,0.25);">Purpose</th>
+              <th style="font-family:'DM Mono',monospace; font-size:9px; letter-spacing:0.2em; text-transform:uppercase; color:var(--gold); padding:10px 14px; text-align:left; border-bottom:1px solid rgba(201,168,76,0.25); white-space:nowrap;">Duration</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td style="padding:10px 14px; font-family:'DM Mono',monospace; font-size:12px; color:var(--gold-light); border-bottom:1px solid rgba(201,168,76,0.07); vertical-align:top; white-space:nowrap;">cookiesAccepted</td>
+              <td style="padding:10px 14px; border-bottom:1px solid rgba(201,168,76,0.07); vertical-align:top;"><span style="display:inline-block; font-family:'DM Mono',monospace; font-size:9px; letter-spacing:0.1em; text-transform:uppercase; padding:3px 8px; border-radius:4px; background:rgba(128,224,144,0.1); color:#80e090; border:1px solid rgba(128,224,144,0.2);">Essential</span></td>
+              <td style="padding:10px 14px; color:rgba(245,240,232,0.8); font-size:14px; line-height:1.55; border-bottom:1px solid rgba(201,168,76,0.07); vertical-align:top;">Remembers that you have accepted this cookie notice so it is not shown again on subsequent visits.</td>
+              <td style="padding:10px 14px; color:rgba(245,240,232,0.8); font-size:14px; border-bottom:1px solid rgba(201,168,76,0.07); vertical-align:top; white-space:nowrap;">1 year</td>
+            </tr>
+            <tr>
+              <td style="padding:10px 14px; font-family:'DM Mono',monospace; font-size:12px; color:var(--gold-light); border-bottom:1px solid rgba(201,168,76,0.07); vertical-align:top; white-space:nowrap;">_ga / _gid</td>
+              <td style="padding:10px 14px; border-bottom:1px solid rgba(201,168,76,0.07); vertical-align:top;"><span style="display:inline-block; font-family:'DM Mono',monospace; font-size:9px; letter-spacing:0.1em; text-transform:uppercase; padding:3px 8px; border-radius:4px; background:rgba(201,168,76,0.1); color:var(--gold); border:1px solid rgba(201,168,76,0.2);">Analytics</span></td>
+              <td style="padding:10px 14px; color:rgba(245,240,232,0.8); font-size:14px; line-height:1.55; border-bottom:1px solid rgba(201,168,76,0.07); vertical-align:top;">Google Analytics cookies used to distinguish users and sessions, helping us understand how visitors interact with our site.</td>
+              <td style="padding:10px 14px; color:rgba(245,240,232,0.8); font-size:14px; border-bottom:1px solid rgba(201,168,76,0.07); vertical-align:top; white-space:nowrap;">2yr / 24hr</td>
+            </tr>
+            <tr>
+              <td style="padding:10px 14px; font-family:'DM Mono',monospace; font-size:12px; color:var(--gold-light); border-bottom:1px solid rgba(201,168,76,0.07); vertical-align:top; white-space:nowrap;">Betway affiliate</td>
+              <td style="padding:10px 14px; border-bottom:1px solid rgba(201,168,76,0.07); vertical-align:top;"><span style="display:inline-block; font-family:'DM Mono',monospace; font-size:9px; letter-spacing:0.1em; text-transform:uppercase; padding:3px 8px; border-radius:4px; background:rgba(100,140,255,0.1); color:#98b4ff; border:1px solid rgba(100,140,255,0.2);">3rd Party</span></td>
+              <td style="padding:10px 14px; color:rgba(245,240,232,0.8); font-size:14px; line-height:1.55; border-bottom:1px solid rgba(201,168,76,0.07); vertical-align:top;">Set when you click our affiliate link. Betway uses this to attribute your visit for commission purposes.</td>
+              <td style="padding:10px 14px; color:rgba(245,240,232,0.8); font-size:14px; border-bottom:1px solid rgba(201,168,76,0.07); vertical-align:top; white-space:nowrap;">30 days</td>
+            </tr>
+            <tr>
+              <td style="padding:10px 14px; font-family:'DM Mono',monospace; font-size:12px; color:var(--gold-light); vertical-align:top; white-space:nowrap;">localStorage</td>
+              <td style="padding:10px 14px; vertical-align:top;"><span style="display:inline-block; font-family:'DM Mono',monospace; font-size:9px; letter-spacing:0.1em; text-transform:uppercase; padding:3px 8px; border-radius:4px; background:rgba(128,224,144,0.1); color:#80e090; border:1px solid rgba(128,224,144,0.2);">Essential</span></td>
+              <td style="padding:10px 14px; color:rgba(245,240,232,0.8); font-size:14px; line-height:1.55; vertical-align:top;">Stores your in-session game preferences. Local storage only — never transmitted to our servers.</td>
+              <td style="padding:10px 14px; color:rgba(245,240,232,0.8); font-size:14px; vertical-align:top; white-space:nowrap;">Persistent</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Section 4 -->
+    <div class="cp-section">
+      <div class="cp-num">04</div>
+      <h3 class="cp-title">Essential Cookies</h3>
+      <p class="cp-body">Some cookies are strictly necessary for our website to function. These include cookies that remember your cookie consent choice. You cannot opt out of these cookies as the site cannot function properly without them.</p>
+    </div>
+
+    <!-- Section 5 -->
+    <div class="cp-section">
+      <div class="cp-num">05</div>
+      <h3 class="cp-title">Third-Party &amp; Affiliate Cookies</h3>
+      <p class="cp-body">When you click "Play for Real Stakes" you are directed to Betway, our affiliate partner. Betway may set their own cookies on your device. We have no control over these cookies.</p>
+      <p class="cp-body">Our "Play for Real Stakes" links are sponsored affiliate links. If you sign up with Betway via our link, we may receive a commission. This does not affect the price you pay.</p>
+      <div class="cp-callout">⚠️ <strong>18+ only.</strong> Gambling can be addictive — please play responsibly. Visit <a href="https://www.begambleaware.org" target="_blank" rel="noopener noreferrer">begambleaware.org</a> or <a href="https://www.gamstop.co.uk" target="_blank" rel="noopener noreferrer">gamstop.co.uk</a> for free support and self-exclusion.</div>
+    </div>
+
+    <!-- Section 6 -->
+    <div class="cp-section">
+      <div class="cp-num">06</div>
+      <h3 class="cp-title">How to Control Cookies</h3>
+      <p class="cp-body">You can control and delete cookies through your browser settings at any time. If you delete or disable cookies, some features may not work — for example, your cookie consent preference will not be saved.</p>
+      <div class="cp-callout">
+        <strong>Chrome:</strong> Settings → Privacy and security → Cookies and other site data<br><br>
+        <strong>Safari (iOS/macOS):</strong> Settings → Safari → Privacy &amp; Security<br><br>
+        <strong>Firefox:</strong> Options → Privacy &amp; Security → Cookies and Site Data<br><br>
+        <strong>Edge:</strong> Settings → Cookies and site permissions → Manage and delete cookies
+      </div>
+    </div>
+
+    <!-- Section 7 -->
+    <div class="cp-section">
+      <div class="cp-num">07</div>
+      <h3 class="cp-title">Changes to This Policy</h3>
+      <p class="cp-body">We may update this Cookie Policy from time to time. Any changes will be posted here with an updated revision date. Continued use of blitzblackjack.com after changes constitutes your acceptance of the updated policy.</p>
+    </div>
+
+    <!-- Section 8 -->
+    <div class="cp-section">
+      <div class="cp-num">08</div>
+      <h3 class="cp-title">Contact Us</h3>
+      <p class="cp-body">If you have any questions about our use of cookies, please contact us:</p>
+      <div class="cp-callout">📧 <a href="mailto:contact@blitzblackjack.com">contact@blitzblackjack.com</a></div>
+    </div>
+
+    <!-- Close button bottom -->
+    <div style="text-align:center; margin-top:32px;">
+      <button onclick="closeCookiePolicy()" style="font-family:'Cormorant Garamond',serif; font-size:18px; font-weight:700; letter-spacing:0.15em; text-transform:uppercase; padding:14px 40px; background:linear-gradient(180deg,#2a6e3a,#163c20); color:#c0f0c8; border:1px solid #4a9e5e; border-radius:8px; cursor:pointer;">Close</button>
+    </div>
+
+  </div>
+</div>
+
+<style>
+.cp-section {
+  background: rgba(4,10,4,0.85);
+  border: 1px solid rgba(201,168,76,0.15);
+  border-radius: 14px;
+  padding: 28px 32px;
+  margin-bottom: 16px;
+  backdrop-filter: blur(6px);
+}
+.cp-num {
+  font-family: 'DM Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 6px;
+}
+.cp-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 24px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--gold-light);
+  margin-bottom: 16px;
+  line-height: 1.1;
+}
+.cp-body {
+  font-size: 16px;
+  line-height: 1.75;
+  color: rgba(245,240,232,0.8);
+  margin-bottom: 12px;
+}
+.cp-body:last-child { margin-bottom: 0; }
+.cp-callout {
+  background: rgba(201,168,76,0.06);
+  border: 1px solid rgba(201,168,76,0.2);
+  border-left: 3px solid var(--gold);
+  border-radius: 8px;
+  padding: 14px 18px;
+  margin-top: 14px;
+  font-size: 14px;
+  line-height: 1.65;
+  color: rgba(245,240,232,0.8);
+}
+.cp-callout a { color: var(--gold); text-decoration: none; border-bottom: 1px solid rgba(201,168,76,0.3); }
+.cp-callout a:hover { color: var(--gold-light); }
+@media (max-width:600px) {
+  .cp-section { padding: 18px 16px; }
+  .cp-title { font-size: 18px; }
+  .cp-body { font-size: 14px; }
+}
+</style>
+
+<script>
+function openCookiePolicy() {
+  const modal = document.getElementById('cookie-policy-modal');
+  modal.style.display = 'block';
+  modal.scrollTop = 0;
+  document.body.style.overflow = 'hidden';
+}
+function closeCookiePolicy() {
+  document.getElementById('cookie-policy-modal').style.display = 'none';
+  document.body.style.overflow = '';
+}
+// Close on backdrop click
+document.getElementById('cookie-policy-modal').addEventListener('click', function(e) {
+  if (e.target === this) closeCookiePolicy();
+});
+</script>
+
+<!-- ═══════════════════════════════════════════════════
+     SHARED MODAL INFRASTRUCTURE
+═══════════════════════════════════════════════════ -->
+<style>
+.page-modal {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 9000;
+  background: rgba(2,7,2,0.92);
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
+.page-modal-inner {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 32px 20px 60px;
+  position: relative;
+  z-index: 1;
+}
+.pm-topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 32px;
+}
+.pm-logo {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 20px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--gold-light);
+}
+.pm-logo span { color: var(--cream); opacity: 0.5; font-weight: 400; margin: 0 5px; }
+.pm-close {
+  font-family: 'DM Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--gold);
+  background: transparent;
+  border: 1px solid rgba(201,168,76,0.3);
+  padding: 8px 18px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.pm-close:hover { background: rgba(201,168,76,0.08); color: var(--gold-light); }
+.pm-hero { text-align: center; margin-bottom: 40px; }
+.pm-ornament { font-size: 24px; letter-spacing: 8px; color: var(--gold); margin-bottom: 16px; opacity: 0.7; }
+.pm-title { font-family: 'Cormorant Garamond', serif; font-size: 46px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gold-light); line-height: 1; margin-bottom: 12px; }
+.pm-sub { font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 0.3em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 20px; }
+.pm-rule { width: 120px; height: 1px; background: linear-gradient(90deg,transparent,var(--gold),transparent); margin: 0 auto 14px; }
+.pm-date { font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 0.15em; color: var(--text-muted); }
+.pm-close-bottom { text-align: center; margin-top: 32px; }
+.pm-close-btn { font-family: 'Cormorant Garamond', serif; font-size: 18px; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; padding: 14px 40px; background: linear-gradient(180deg,#2a6e3a,#163c20); color: #c0f0c8; border: 1px solid #4a9e5e; border-radius: 8px; cursor: pointer; }
+@media (max-width:600px) {
+  .pm-title { font-size: 30px; }
+  .pm-ornament { font-size: 18px; letter-spacing: 5px; }
+  .page-modal-inner { padding: 24px 14px 48px; }
+}
+</style>
+
+<!-- ═══════════════════════════════════════════════════
+     PRIVACY POLICY MODAL
+═══════════════════════════════════════════════════ -->
+<div id="modal-privacy" class="page-modal">
+  <div class="page-modal-inner">
+    <div class="pm-topbar">
+      <div class="pm-logo">Blitz<span>♠</span>BlackJack</div>
+      <button class="pm-close" onclick="closeModal('privacy')">✕ Close</button>
+    </div>
+    <div class="pm-hero">
+      <div class="pm-ornament">♠ ♥ ♦ ♣</div>
+      <h2 class="pm-title">Privacy Policy</h2>
+      <div class="pm-sub">Blitz Blackjack · blitzblackjack.com</div>
+      <div class="pm-rule"></div>
+      <div class="pm-date">Last updated: 1 June 2025</div>
+    </div>
+
+    <div class="cp-section">
+      <div class="cp-num">01</div>
+      <h3 class="cp-title">Who We Are</h3>
+      <p class="cp-body">Blitz Blackjack ("we", "us", "our") operates the website blitzblackjack.com — a free-to-play online blackjack game for entertainment purposes only. No real money is wagered on our platform.</p>
+      <p class="cp-body">This Privacy Policy explains how we collect, use, and protect any information relating to your use of our website.</p>
+    </div>
+
+    <div class="cp-section">
+      <div class="cp-num">02</div>
+      <h3 class="cp-title">Information We Collect</h3>
+      <p class="cp-body">We collect minimal information. We do not require you to create an account, log in, or provide any personal details to play the game.</p>
+      <p class="cp-body">We may collect the following automatically via analytics services:</p>
+      <div class="cp-callout">
+        • Pages visited and time spent on site<br>
+        • Browser type and device type<br>
+        • Approximate geographic location (country/region)<br>
+        • Referring website (how you found us)<br><br>
+        This data is aggregated and anonymous — we cannot identify you individually from it.
+      </div>
+    </div>
+
+    <div class="cp-section">
+      <div class="cp-num">03</div>
+      <h3 class="cp-title">How We Use Your Information</h3>
+      <p class="cp-body">We use anonymous analytics data solely to understand how our site is used and to improve the player experience. We do not sell, rent, or share your data with third parties for marketing purposes.</p>
+      <p class="cp-body">If you click our "Play for Real Stakes" affiliate link, you will be directed to Betway's website. Any information you provide to Betway is governed by <a href="https://www.betway.com/en-gb/privacy-policy" target="_blank" rel="noopener noreferrer" style="color:var(--gold);text-decoration:none;border-bottom:1px solid rgba(201,168,76,0.3);">Betway's own Privacy Policy</a>.</p>
+    </div>
+
+    <div class="cp-section">
+      <div class="cp-num">04</div>
+      <h3 class="cp-title">Cookies</h3>
+      <p class="cp-body">We use cookies to improve your experience and for basic analytics. For full details, please see our <a href="#" onclick="closeModal('privacy');openCookiePolicy();return false;" style="color:var(--gold);text-decoration:none;border-bottom:1px solid rgba(201,168,76,0.3);">Cookie Policy</a>.</p>
+    </div>
+
+    <div class="cp-section">
+      <div class="cp-num">05</div>
+      <h3 class="cp-title">Data Retention</h3>
+      <p class="cp-body">We do not store any personal data on our servers. Anonymous analytics data is retained by Google Analytics for up to 26 months. Cookie consent preferences are stored locally on your device for up to 1 year.</p>
+    </div>
+
+    <div class="cp-section">
+      <div class="cp-num">06</div>
+      <h3 class="cp-title">Your Rights (GDPR)</h3>
+      <p class="cp-body">If you are located in the UK or European Economic Area, you have rights under data protection law including the right to access, rectify, or erase any personal data we hold about you. As we hold no personally identifiable data, there is typically nothing to action — but if you have concerns, please contact us.</p>
+      <p class="cp-body">You also have the right to opt out of analytics tracking by using browser settings or a tool such as the <a href="https://tools.google.com/dlpage/gaoptout" target="_blank" rel="noopener noreferrer" style="color:var(--gold);text-decoration:none;border-bottom:1px solid rgba(201,168,76,0.3);">Google Analytics Opt-out Browser Add-on</a>.</p>
+    </div>
+
+    <div class="cp-section">
+      <div class="cp-num">07</div>
+      <h3 class="cp-title">Third-Party Links</h3>
+      <p class="cp-body">Our site contains links to third-party websites including Betway, BeGambleAware, and GamStop. We are not responsible for the privacy practices or content of these sites and encourage you to read their privacy policies.</p>
+    </div>
+
+    <div class="cp-section">
+      <div class="cp-num">08</div>
+      <h3 class="cp-title">Changes &amp; Contact</h3>
+      <p class="cp-body">We may update this policy from time to time. Changes will be posted on this page with an updated date. For any privacy-related questions, contact us at:</p>
+      <div class="cp-callout">📧 <a href="mailto:contact@blitzblackjack.com" style="color:var(--gold);text-decoration:none;">contact@blitzblackjack.com</a></div>
+    </div>
+
+    <div class="pm-close-bottom"><button class="pm-close-btn" onclick="closeModal('privacy')">Close</button></div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════
+     TERMS & CONDITIONS MODAL
+═══════════════════════════════════════════════════ -->
+<div id="modal-terms" class="page-modal">
+  <div class="page-modal-inner">
+    <div class="pm-topbar">
+      <div class="pm-logo">Blitz<span>♠</span>BlackJack</div>
+      <button class="pm-close" onclick="closeModal('terms')">✕ Close</button>
+    </div>
+    <div class="pm-hero">
+      <div class="pm-ornament">♠ ♥ ♦ ♣</div>
+      <h2 class="pm-title">Terms &amp; Conditions</h2>
+      <div class="pm-sub">Blitz Blackjack · blitzblackjack.com</div>
+      <div class="pm-rule"></div>
+      <div class="pm-date">Last updated: 1 June 2025</div>
+    </div>
+
+    <div class="cp-section">
+      <div class="cp-num">01</div>
+      <h3 class="cp-title">Acceptance of Terms</h3>
+      <p class="cp-body">By accessing or using blitzblackjack.com, you agree to be bound by these Terms and Conditions. If you do not agree, please do not use this site.</p>
+    </div>
+
+    <div class="cp-section">
+      <div class="cp-num">02</div>
+      <h3 class="cp-title">Nature of the Service</h3>
+      <p class="cp-body">Blitz Blackjack is a free-to-play online blackjack game provided for entertainment purposes only. No real money is wagered, won, or lost on this platform. All in-game currency ("chips" or "$" values) is entirely virtual and has no monetary value.</p>
+      <p class="cp-body">This service does not constitute gambling. However, it depicts themes and gameplay associated with casino card games. Users must be 18 years of age or older to use this site.</p>
+    </div>
+
+    <div class="cp-section">
+      <div class="cp-num">03</div>
+      <h3 class="cp-title">Eligibility</h3>
+      <p class="cp-body">You must be at least 18 years old to use this website. By using the site, you confirm that you meet this age requirement. We reserve the right to terminate access for anyone we believe does not meet this requirement.</p>
+    </div>
+
+    <div class="cp-section">
+      <div class="cp-num">04</div>
+      <h3 class="cp-title">Affiliate Links &amp; Third Parties</h3>
+      <p class="cp-body">This site contains affiliate links to third-party gambling operators including Betway. If you click these links and sign up, we may earn a commission. We are not responsible for any third-party website, its content, or the services it provides.</p>
+      <p class="cp-body">Real-money gambling is subject to the terms, conditions, and responsible gambling policies of the relevant operator. Ensure you understand those terms before depositing real money.</p>
+      <div class="cp-callout">⚠️ <strong>18+ only.</strong> Real money gambling carries risk. Never gamble more than you can afford to lose. Visit <a href="https://www.begambleaware.org" target="_blank" rel="noopener noreferrer" style="color:var(--gold);text-decoration:none;border-bottom:1px solid rgba(201,168,76,0.3);">begambleaware.org</a> for free support.</div>
+    </div>
+
+    <div class="cp-section">
+      <div class="cp-num">05</div>
+      <h3 class="cp-title">Intellectual Property</h3>
+      <p class="cp-body">All content on blitzblackjack.com — including but not limited to the game code, design, graphics, and text — is the intellectual property of Blitz Blackjack unless otherwise stated. You may not reproduce, copy, or redistribute any content without prior written permission.</p>
+    </div>
+
+    <div class="cp-section">
+      <div class="cp-num">06</div>
+      <h3 class="cp-title">Disclaimer of Warranties</h3>
+      <p class="cp-body">This website is provided "as is" without any warranties of any kind, express or implied. We do not guarantee that the site will be uninterrupted, error-free, or free of viruses. We shall not be liable for any direct, indirect, or consequential losses arising from your use of this site.</p>
+    </div>
+
+    <div class="cp-section">
+      <div class="cp-num">07</div>
+      <h3 class="cp-title">Governing Law</h3>
+      <p class="cp-body">These Terms shall be governed by and construed in accordance with the laws of England and Wales. Any disputes shall be subject to the exclusive jurisdiction of the courts of England and Wales.</p>
+    </div>
+
+    <div class="cp-section">
+      <div class="cp-num">08</div>
+      <h3 class="cp-title">Changes &amp; Contact</h3>
+      <p class="cp-body">We reserve the right to update these Terms at any time. Continued use of the site constitutes acceptance of the revised Terms. For any queries:</p>
+      <div class="cp-callout">📧 <a href="mailto:contact@blitzblackjack.com" style="color:var(--gold);text-decoration:none;">contact@blitzblackjack.com</a></div>
+    </div>
+
+    <div class="pm-close-bottom"><button class="pm-close-btn" onclick="closeModal('terms')">Close</button></div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════
+     RESPONSIBLE GAMBLING MODAL
+═══════════════════════════════════════════════════ -->
+<div id="modal-rg" class="page-modal">
+  <div class="page-modal-inner">
+    <div class="pm-topbar">
+      <div class="pm-logo">Blitz<span>♠</span>BlackJack</div>
+      <button class="pm-close" onclick="closeModal('rg')">✕ Close</button>
+    </div>
+    <div class="pm-hero">
+      <div class="pm-ornament">♠ ♥ ♦ ♣</div>
+      <h2 class="pm-title">Responsible Gambling</h2>
+      <div class="pm-sub">Blitz Blackjack · blitzblackjack.com</div>
+      <div class="pm-rule"></div>
+    </div>
+
+    <div class="cp-section" style="border-color:rgba(128,224,144,0.2); background:rgba(10,30,10,0.85);">
+      <div class="cp-num" style="color:#80e090;">Important</div>
+      <h3 class="cp-title" style="color:#a0f0b0;">Blitz Blackjack Is For Entertainment Only</h3>
+      <p class="cp-body">No real money is wagered on this site. All chips are virtual. However, we take responsible gambling seriously and want every player to understand the risks of real-money gambling before following any affiliate links on this site.</p>
+    </div>
+
+    <div class="cp-section">
+      <div class="cp-num">01</div>
+      <h3 class="cp-title">Know the Risks</h3>
+      <p class="cp-body">Gambling is a form of entertainment, not a way to make money. The house always has an edge. No strategy — including basic strategy practised on this site — guarantees winnings in real-money play.</p>
+      <p class="cp-body">For some people, gambling can become a problem. Signs of problem gambling include chasing losses, gambling with money you can't afford to lose, hiding gambling activity, or feeling unable to stop.</p>
+    </div>
+
+    <div class="cp-section">
+      <div class="cp-num">02</div>
+      <h3 class="cp-title">Stay in Control</h3>
+      <div class="cp-callout">
+        ✅ Set a budget before you play and stick to it<br><br>
+        ✅ Set time limits on your gambling sessions<br><br>
+        ✅ Never chase losses<br><br>
+        ✅ Don't gamble under the influence of alcohol or drugs<br><br>
+        ✅ Take regular breaks<br><br>
+        ✅ Only gamble with money you can afford to lose<br><br>
+        ✅ Keep gambling for fun — stop if it stops being enjoyable
+      </div>
+    </div>
+
+    <div class="cp-section">
+      <div class="cp-num">03</div>
+      <h3 class="cp-title">Self-Exclusion</h3>
+      <p class="cp-body">If you feel your gambling is out of control, self-exclusion is a powerful tool. <strong style="color:var(--gold-light);">GamStop</strong> is the UK's national self-exclusion scheme — it lets you restrict your online gambling across all UK-licensed operators with a single registration.</p>
+      <div class="cp-callout">
+        🔒 <strong><a href="https://www.gamstop.co.uk" target="_blank" rel="noopener noreferrer" style="color:var(--gold);text-decoration:none;border-bottom:1px solid rgba(201,168,76,0.3);">www.gamstop.co.uk</a></strong> — Free UK self-exclusion service<br><br>
+        Self-exclusion can be set for 6 months, 1 year, or 5 years. It applies to all UKGC-licensed online gambling sites.
+      </div>
+    </div>
+
+    <div class="cp-section">
+      <div class="cp-num">04</div>
+      <h3 class="cp-title">Get Help &amp; Support</h3>
+      <p class="cp-body">Free, confidential support is available 24/7. You are not alone.</p>
+      <div class="cp-callout">
+        🟢 <strong><a href="https://www.begambleaware.org" target="_blank" rel="noopener noreferrer" style="color:var(--gold);text-decoration:none;">BeGambleAware</a></strong> — <a href="tel:08088020133" style="color:var(--gold);text-decoration:none;">0808 8020 133</a> (free, 24/7)<br><br>
+        🟢 <strong><a href="https://www.gamcare.org.uk" target="_blank" rel="noopener noreferrer" style="color:var(--gold);text-decoration:none;">GamCare</a></strong> — <a href="tel:08088020133" style="color:var(--gold);text-decoration:none;">0808 8020 133</a> (free helpline &amp; live chat)<br><br>
+        🟢 <strong><a href="https://www.gamblernanonymous.org.uk" target="_blank" rel="noopener noreferrer" style="color:var(--gold);text-decoration:none;">Gamblers Anonymous UK</a></strong> — peer support meetings<br><br>
+        🟢 <strong><a href="https://www.nhs.uk/live-well/addiction-support/gambling-addiction/" target="_blank" rel="noopener noreferrer" style="color:var(--gold);text-decoration:none;">NHS Gambling Support</a></strong> — free NHS treatment programmes
+      </div>
+    </div>
+
+    <div class="cp-section">
+      <div class="cp-num">05</div>
+      <h3 class="cp-title">Tools Offered by Operators</h3>
+      <p class="cp-body">Reputable gambling operators licensed by the UK Gambling Commission (UKGC) are required to offer responsible gambling tools including deposit limits, session time limits, cooling-off periods, and self-exclusion. Always use these tools when playing for real money.</p>
+    </div>
+
+    <div class="cp-section">
+      <div class="cp-num">06</div>
+      <h3 class="cp-title">Under 18?</h3>
+      <p class="cp-body">This site is intended for users aged 18 and over. Real-money gambling is illegal for anyone under 18 in the United Kingdom. If you are under 18, please do not follow any real-money gambling links on this site.</p>
+      <p class="cp-body">Parents and guardians can use tools like <a href="https://www.gamcare.org.uk/self-help/talk-to-someone-about-your-gambling/gamban/" target="_blank" rel="noopener noreferrer" style="color:var(--gold);text-decoration:none;border-bottom:1px solid rgba(201,168,76,0.3);">Gamban</a> to block access to gambling sites on shared devices.</p>
+    </div>
+
+    <div class="pm-close-bottom"><button class="pm-close-btn" onclick="closeModal('rg')">Close</button></div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════
+     ABOUT MODAL
+═══════════════════════════════════════════════════ -->
+<div id="modal-about" class="page-modal">
+  <div class="page-modal-inner">
+    <div class="pm-topbar">
+      <div class="pm-logo">Blitz<span>♠</span>BlackJack</div>
+      <button class="pm-close" onclick="closeModal('about')">✕ Close</button>
+    </div>
+    <div class="pm-hero">
+      <div class="pm-ornament">♠ ♥ ♦ ♣</div>
+      <h2 class="pm-title">About</h2>
+      <div class="pm-sub">Blitz Blackjack · blitzblackjack.com</div>
+      <div class="pm-rule"></div>
+    </div>
+
+    <div class="cp-section">
+      <div class="cp-num">01</div>
+      <h3 class="cp-title">What Is Blitz Blackjack?</h3>
+      <p class="cp-body">Blitz Blackjack is a free, browser-based blackjack game designed to help players practise basic strategy and improve their understanding of the game — all with no real money involved.</p>
+      <p class="cp-body">The concept is simple: you have 3 minutes and £100 in virtual chips. How high can your balance go? The timer format creates a fast, focused experience that encourages sharp decision-making rather than passive play.</p>
+    </div>
+
+    <div class="cp-section">
+      <div class="cp-num">02</div>
+      <h3 class="cp-title">Why We Built It</h3>
+      <p class="cp-body">Blackjack is unique among casino games in that skilled play — specifically, basic strategy — genuinely reduces the house edge. Many players sit down at real-money blackjack tables without knowing the mathematically correct move for every situation.</p>
+      <p class="cp-body">We built Blitz Blackjack as a training tool: a place to drill decisions, build confidence, and learn the rhythms of the game without financial pressure. The built-in strategy hint system shows the statistically optimal move in real time so you can learn as you play.</p>
+    </div>
+
+    <div class="cp-section">
+      <div class="cp-num">03</div>
+      <h3 class="cp-title">The Game</h3>
+      <div class="cp-callout">
+        🃏 Standard Vegas rules — dealer stands on soft 17<br><br>
+        🃏 Blackjack pays 3:2<br><br>
+        🃏 Double down and split available<br><br>
+        🃏 Basic strategy hints on/off toggle<br><br>
+        🃏 Auto-stand on 21<br><br>
+        🃏 3-minute timed challenge format<br><br>
+        🃏 Auto-deal between hands for fast play<br><br>
+        🃏 Share your score at the end
+      </div>
+    </div>
+
+    <div class="cp-section">
+      <div class="cp-num">04</div>
+      <h3 class="cp-title">Affiliate Disclosure</h3>
+      <p class="cp-body">Blitz Blackjack is free to play and always will be. To keep the site running we include affiliate links to regulated gambling operators. If you click "Play for Real Stakes" and sign up, we may earn a commission — at no cost to you.</p>
+      <p class="cp-body">We only partner with operators licensed by the UK Gambling Commission (UKGC). We never recommend unregulated sites.</p>
+      <div class="cp-callout">⚠️ <strong>18+ only.</strong> Please gamble responsibly. Real money gambling carries financial risk. This site is for entertainment and practice only.</div>
+    </div>
+
+    <div class="cp-section">
+      <div class="cp-num">05</div>
+      <h3 class="cp-title">Contact Us</h3>
+      <p class="cp-body">We'd love to hear from you — whether it's feedback, a bug report, or a partnership enquiry.</p>
+      <div class="cp-callout">
+        📧 <a href="mailto:contact@blitzblackjack.com" style="color:var(--gold);text-decoration:none;">contact@blitzblackjack.com</a><br><br>
+        🌐 <a href="https://blitzblackjack.com" style="color:var(--gold);text-decoration:none;">blitzblackjack.com</a>
+      </div>
+    </div>
+
+    <div class="pm-close-bottom"><button class="pm-close-btn" onclick="closeModal('about')">Close</button></div>
+  </div>
+</div>
+
+<script>
+function openModal(id) {
+  const modal = document.getElementById('modal-' + id);
+  if (!modal) return;
+  modal.style.display = 'block';
+  modal.scrollTop = 0;
+  document.body.style.overflow = 'hidden';
+}
+function closeModal(id) {
+  const modal = document.getElementById('modal-' + id);
+  if (!modal) return;
+  modal.style.display = 'none';
+  document.body.style.overflow = '';
+}
+// Close on backdrop click for all page modals
+document.querySelectorAll('.page-modal').forEach(function(modal) {
+  modal.addEventListener('click', function(e) {
+    if (e.target === this) {
+      this.style.display = 'none';
+      document.body.style.overflow = '';
+    }
+  });
+});
+</script>
+
 </body>
 </html>
